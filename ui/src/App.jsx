@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { LoginPage } from "./pages/LoginPage";
 import Home from "./pages/Home";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -9,7 +8,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="/login" element={<LoginPage />} /> */}
       </Routes>
     </BrowserRouter>
   );

@@ -13,6 +13,7 @@ const Home = () => {
       <HeroSlider />
       <ProductGrid />
       <ProductGrid />
+      <Footer />
     </div>
   );
 };

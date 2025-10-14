@@ -8,8 +8,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import Autoplay from "embla-carousel-autoplay";
 
 export function ProductGrid() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false }) // 3 seconds delay
+  );
   const products = [
     {
       id: 1,
@@ -66,7 +70,14 @@ export function ProductGrid() {
       <h3 className="text-2xl py-6 font-bold">
         Products you would like to see
       </h3>
-      <Carousel opts={{ align: "start" }} className="w-full min-w-sm">
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true, // enable looping
+        }}
+        className="w-full min-w-sm"
+        plugins={[plugin.current]} // autoplay plugin
+      >
         <CarouselContent>
           {products.map((product) => (
             <CarouselItem

@@ -4,19 +4,19 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const slides = [
   {
-    image: "/assets/Images/b1.jpg",
+    image: "/assets/Images/b2.jpg",
     heading: "Build Your Dream Website",
     subheading: "Empower your business with modern web design.",
     cta: "Get Started",
   },
   {
-    image: "/assets/Images/b2.jpg",
+    image: "/assets/Images/b6.jpg",
     heading: "Grow Your Online Presence",
     subheading: "Reach more customers with smart digital solutions.",
     cta: "Learn More",
   },
   {
-    image: "/assets/Images/b3.jpg",
+    image: "/assets/Images/b5.jpg",
     heading: "Design. Develop. Deliver.",
     subheading: "We craft experiences that inspire.",
     cta: "Contact Us",

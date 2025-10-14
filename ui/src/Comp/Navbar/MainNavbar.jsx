@@ -2,7 +2,13 @@
 
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
+import {
+  CircleCheckIcon,
+  CircleHelpIcon,
+  CircleIcon,
+  CircleUser,
+  User,
+} from "lucide-react";
 
 import {
   NavigationMenu,
@@ -14,6 +20,30 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import Profile from "../Profile/Profile";
+import LoginDialog from "@/pages/LoginPage";
 
 const components = [
   {
@@ -52,6 +82,8 @@ const components = [
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
 ];
+
+const user = false;
 
 function NavigationMenuDemo() {
   return (
@@ -193,17 +225,42 @@ function NavigationMenuDemo() {
 }
 
 const RightNavbar = () => {
+  const [showNewDialog, setShowNewDialog] = React.useState(false);
+  const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
   return (
     <div>
       <div className="flex items-start gap-2">
-        <Button
-          className="bg-green-600 text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"
-          variant="outline"
-          size="lg"
-        >
-          Login
-        </Button>
+        {user ? (
+          <>
+            <DropdownMenu modal={false}>
+              <DropdownMenuTrigger asChild>
+                <User className="border border-black rounded-full" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-40" align="end">
+                {/* <DropdownMenuLabel>File Actions</DropdownMenuLabel> */}
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
+                    Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  {/* <DropdownMenuItem disabled>Download</DropdownMenuItem> */}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
+        ) : (
+          <Button
+            className="bg-green-600 text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"
+            variant="outline"
+            size="lg"
+            onClick={() => setOpenLoginDialog(true)}
+          >
+            Login
+          </Button>
+        )}
       </div>
+      <Profile open={showNewDialog} onOpenChange={setShowNewDialog} />
+      <LoginDialog open={openLoginDialog} onOpenChange={setOpenLoginDialog} />
     </div>
   );
 };
