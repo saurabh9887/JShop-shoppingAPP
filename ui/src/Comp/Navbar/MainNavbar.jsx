@@ -1,4 +1,4 @@
-("use client");
+"use client";
 
 import * as React from "react";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import {
   CircleCheckIcon,
   CircleHelpIcon,
   CircleIcon,
-  CircleUser,
+  Menu,
   User,
 } from "lucide-react";
 
@@ -20,28 +20,21 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 import Profile from "../Profile/Profile";
 import LoginDialog from "@/pages/LoginPage";
 
@@ -83,11 +76,11 @@ const components = [
   },
 ];
 
-const user = false;
+const user = true;
 
 function NavigationMenuDemo() {
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenu viewport={false} className="hidden md:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Home</NavigationMenuTrigger>
@@ -227,49 +220,44 @@ function NavigationMenuDemo() {
 const RightNavbar = () => {
   const [showNewDialog, setShowNewDialog] = React.useState(false);
   const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
+
   return (
     <div>
-      <div className="flex items-start gap-2">
-        {user ? (
-          <>
-            <DropdownMenu modal={false}>
-              <DropdownMenuTrigger asChild>
-                <User className="border border-black rounded-full" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-40" align="end">
-                {/* <DropdownMenuLabel>File Actions</DropdownMenuLabel> */}
-                <DropdownMenuGroup>
-                  <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
-                    Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
-                  {/* <DropdownMenuItem disabled>Download</DropdownMenuItem> */}
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </>
-        ) : (
-          <Button
-            className="bg-green-600 text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"
-            variant="outline"
-            size="lg"
-            onClick={() => setOpenLoginDialog(true)}
-          >
-            Login
-          </Button>
-        )}
-      </div>
+      {user ? (
+        <DropdownMenu className="z-auto" modal={false}>
+          <DropdownMenuTrigger asChild>
+            <User className="border border-black rounded-full cursor-pointer" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-40 z-[200]" align="end">
+            <DropdownMenuGroup>
+              <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem>Logout</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <Button
+          className="bg-green-600 text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"
+          variant="outline"
+          size="lg"
+          onClick={() => setOpenLoginDialog(true)}
+        >
+          Login
+        </Button>
+      )}
       <Profile open={showNewDialog} onOpenChange={setShowNewDialog} />
       <LoginDialog open={openLoginDialog} onOpenChange={setOpenLoginDialog} />
     </div>
   );
 };
 
-function ListItem({ title, children, href, ...props }) {
+function ListItem({ title, children, href }) {
   return (
-    <li {...props}>
+    <li>
       <NavigationMenuLink asChild>
-        <Link href={href}>
+        <Link to={href}>
           <div className="text-sm leading-none font-medium">{title}</div>
           <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
             {children}
@@ -280,20 +268,60 @@ function ListItem({ title, children, href, ...props }) {
   );
 }
 
+// ✅ FIXED Navbar
 const MainNavbar = () => {
   return (
-    <div className="flex justify-between items-center p-5 shadow-lg">
-      <div className="left">
-        <span className="cursor-pointer">JSHOP</span>
-      </div>
-      <div className="middle">
-        <NavigationMenuDemo />
-      </div>
-      <div className="right">
+    <header className="flex justify-between items-center p-4 shadow-md sticky top-0 bg-white dark:bg-gray-900 z-[100]">
+      {/* Logo */}
+      <div className="font-bold text-lg cursor-pointer">JSHOP</div>
+
+      {/* Desktop Menu */}
+      <NavigationMenuDemo />
+
+      {/* Right Section (Login + Hamburger) */}
+      <div className="flex items-center gap-3">
+        <div className="block md:hidden">
+          <MobileMenu />
+        </div>
         <RightNavbar />
       </div>
-    </div>
+    </header>
   );
 };
+
+// ✅ Fixed MobileMenu with correct z-index + working trigger
+function MobileMenu() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="icon" className="z-[101]">
+          <Menu className="h-6 w-6" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent
+        side="left"
+        className="w-[260px] bg-white dark:bg-gray-900 text-gray-900 dark:text-white z-[200]"
+      >
+        <SheetHeader>
+          <SheetTitle className="text-xl font-bold">JSHOP</SheetTitle>
+        </SheetHeader>
+        <nav className="flex flex-col space-y-5 mt-8">
+          <Link to="/" className="hover:text-green-600 text-lg">
+            Home
+          </Link>
+          <Link to="/shop" className="hover:text-green-600 text-lg">
+            Shop
+          </Link>
+          <Link to="/about" className="hover:text-green-600 text-lg">
+            About
+          </Link>
+          <Link to="/contact" className="hover:text-green-600 text-lg">
+            Contact
+          </Link>
+        </nav>
+      </SheetContent>
+    </Sheet>
+  );
+}
 
 export default MainNavbar;

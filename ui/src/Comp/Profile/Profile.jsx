@@ -18,7 +18,7 @@ const Profile = ({ open, onOpenChange }) => {
   return (
     <div>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] z-[200]">
           <DialogHeader>
             <DialogTitle>Profile</DialogTitle>
             <DialogDescription>

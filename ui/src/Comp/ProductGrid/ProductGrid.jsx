@@ -12,8 +12,9 @@ import Autoplay from "embla-carousel-autoplay";
 
 export function ProductGrid() {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false }) // 3 seconds delay
+    Autoplay({ delay: 3000, stopOnInteraction: false })
   );
+
   const products = [
     {
       id: 1,
@@ -47,69 +48,71 @@ export function ProductGrid() {
     },
     {
       id: 6,
-      name: "Mechanical Keyboard",
-      price: "$129",
+      name: "Gaming Mouse",
+      price: "$59",
       image: "/assets/Images/ProductGridImages/pg6.jpg",
     },
     {
       id: 7,
-      name: "Mechanical Keyboard",
-      price: "$129",
+      name: "Noise Cancelling Earbuds",
+      price: "$89",
       image: "/assets/Images/ProductGridImages/pg7.jpg",
     },
     {
       id: 8,
-      name: "Mechanical Keyboard",
-      price: "$129",
-      image: "/assets/Images/ProductGridImages/pg7.jpg",
+      name: "Portable Charger",
+      price: "$49",
+      image: "/assets/Images/ProductGridImages/pg8.jpg",
     },
   ];
-  //  "/assets/Images/b2.jpg",
+
   return (
-    <div className="w-full p-20 py-6">
-      <h3 className="text-2xl py-6 font-bold">
-        Products you would like to see
-      </h3>
-      <Carousel
-        opts={{
-          align: "start",
-          loop: true, // enable looping
-        }}
-        className="w-full min-w-sm"
-        plugins={[plugin.current]} // autoplay plugin
-      >
-        <CarouselContent>
-          {products.map((product) => (
-            <CarouselItem
-              key={product.id}
-              className="md:basis-1/2 lg:basis-1/5"
-            >
-              <div className="">
-                <Card className="p-0">
-                  <CardContent className="flex flex-col items-center justify-between h-72 p-0">
+    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-20 py-12">
+      <div className="max-w-7xl mx-auto">
+        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">
+          Products You Would Like to See
+        </h3>
+
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+          plugins={[plugin.current]}
+        >
+          <CarouselContent>
+            {products.map((product) => (
+              <CarouselItem
+                key={product.id}
+                className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/5 p-2"
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="flex flex-col items-center justify-between h-full p-3 sm:p-4">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-40 object-cover  mb-3"
+                      className="w-full h-40 sm:h-48 object-cover rounded-md mb-3"
                     />
-                    <span className="text-lg font-semibold">
+                    <span className="text-base sm:text-lg font-semibold text-center">
                       {product.name}
                     </span>
                     <span className="text-sm text-gray-600">
                       {product.price}
                     </span>
-                    <Button className="mt-2 w-full cursor-pointer">
+                    <Button className="mt-3 w-full bg-[#61894d] hover:bg-[#50713f]">
                       Add to Cart
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
+        </Carousel>
+      </div>
+    </section>
   );
 }
