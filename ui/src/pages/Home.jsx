@@ -1,3 +1,4 @@
+import AboutUs from "@/Comp/AboutUs/AboutUs";
 import Footer from "@/Comp/Footer";
 import HeroSlider from "@/Comp/HeroSection/HeroSection";
 import HeaderTop from "@/Comp/Navbar/HeaderTop";
@@ -12,6 +13,7 @@ const Home = () => {
       <HeaderTop />
       <MainNavbar />
       <HeroSlider />
+      <AboutUs />
       <ProductGrid />
       <ProductGrid />
       <Testimonials />

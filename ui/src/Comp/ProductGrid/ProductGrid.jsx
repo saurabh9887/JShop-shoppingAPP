@@ -67,11 +67,11 @@ export function ProductGrid() {
   ];
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-20 py-12">
+    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-28 py-12">
       <div className="max-w-7xl mx-auto">
-        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">
+        <h4 className="sm:text-3xl font-medium mb-6 text-gray-800">
           Products You Would Like to See
-        </h3>
+        </h4>
 
         <Carousel
           opts={{
@@ -85,7 +85,7 @@ export function ProductGrid() {
             {products.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/5 p-2"
+                className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 p-2"
               >
                 <Card className="h-full hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="flex flex-col items-center justify-between h-full p-3 sm:p-4">
@@ -100,7 +100,7 @@ export function ProductGrid() {
                     <span className="text-sm text-gray-600">
                       {product.price}
                     </span>
-                    <Button className="mt-3 w-full bg-[#61894d] hover:bg-[#50713f]">
+                    <Button className="mt-3 w-full">
                       Add to Cart
                     </Button>
                   </CardContent>
