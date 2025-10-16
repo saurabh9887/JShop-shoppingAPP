@@ -10,14 +10,11 @@ import React from "react";
 const Home = () => {
   return (
     <div className="">
-      <HeaderTop />
-      <MainNavbar />
       <HeroSlider />
       <AboutUs />
-      <ProductGrid />
-      <ProductGrid />
+      <ProductGrid title="New Arrivals" />
+      <ProductGrid title="Today's Offers" />
       <Testimonials />
-      <Footer />
     </div>
   );
 };

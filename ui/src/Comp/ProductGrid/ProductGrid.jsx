@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import Autoplay from "embla-carousel-autoplay";
+import { Typewriter } from "react-simple-typewriter";
 
-export function ProductGrid() {
+export function ProductGrid({ title }) {
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false })
   );
@@ -62,15 +63,23 @@ export function ProductGrid() {
       id: 8,
       name: "Portable Charger",
       price: "$49",
-      image: "/assets/Images/ProductGridImages/pg8.jpg",
+      image: "/assets/Images/ProductGridImages/pg4.jpg",
     },
   ];
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-10 lg:px-28 py-12">
+    <section className="w-full sm:px-6  lg:px-28 py-12">
       <div className="max-w-7xl mx-auto">
-        <h4 className="sm:text-3xl font-medium mb-6 text-gray-800">
-          Products You Would Like to See
+        <h4 className="text-3xl md:text-4xl mb-6 text-center font-bold text-gray-800 dark:text-white">
+          <Typewriter
+            words={[title]}
+            loop={false}
+            cursor
+            cursorStyle="|"
+            typeSpeed={50}
+            deleteSpeed={50}
+            delaySpeed={2000}
+          />
         </h4>
 
         <Carousel
@@ -85,14 +94,15 @@ export function ProductGrid() {
             {products.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 p-2"
+                className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
               >
                 <Card className="h-full hover:shadow-lg transition-shadow duration-300">
-                  <CardContent className="flex flex-col items-center justify-between h-full p-3 sm:p-4">
+                  <CardContent className="flex flex-col items-center justify-between h-full ">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-40 sm:h-48 object-cover rounded-md mb-3"
+                      style={{ borderRadius: "5px 5px 0px 0px" }}
+                      className="w-full h-40 sm:h-48 object-cover mb-3"
                     />
                     <span className="text-base sm:text-lg font-semibold text-center">
                       {product.name}
@@ -100,9 +110,7 @@ export function ProductGrid() {
                     <span className="text-sm text-gray-600">
                       {product.price}
                     </span>
-                    <Button className="mt-3 w-full">
-                      Add to Cart
-                    </Button>
+                    <Button className="mt-3 w-full">Add to Cart</Button>
                   </CardContent>
                 </Card>
               </CarouselItem>
