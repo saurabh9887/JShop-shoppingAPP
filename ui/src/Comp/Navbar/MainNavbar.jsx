@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   CircleCheckIcon,
   CircleHelpIcon,
@@ -270,10 +270,16 @@ function ListItem({ title, children, href }) {
 
 // ✅ FIXED Navbar
 const MainNavbar = () => {
+  const navigate = useNavigate();
   return (
     <header className="flex justify-between items-center p-4 shadow-md sticky top-0 bg-white dark:bg-gray-900 z-[100]">
       {/* Logo */}
-      <div className="font-bold text-lg cursor-pointer">JSHOP</div>
+      <div
+        className="font-bold text-lg cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        JSHOP
+      </div>
 
       {/* Desktop Menu */}
       <NavigationMenuDemo />

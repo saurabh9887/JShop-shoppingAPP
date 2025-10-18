@@ -10,11 +10,14 @@ import {
 import { Button } from "@/components/ui/button";
 import Autoplay from "embla-carousel-autoplay";
 import { Typewriter } from "react-simple-typewriter";
+import { useNavigate } from "react-router-dom";
 
 export function ProductGrid({ title }) {
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false })
   );
+
+  const navigate = useNavigate();
 
   const products = [
     {
@@ -95,8 +98,9 @@ export function ProductGrid({ title }) {
               <CarouselItem
                 key={product.id}
                 className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+                onClick={() => navigate("shop/4")}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                <Card className="h-full hover:shadow-2xl cursor-pointer transition-shadow duration-300">
                   <CardContent className="flex flex-col items-center justify-between h-full ">
                     <img
                       src={product.image}
@@ -110,7 +114,7 @@ export function ProductGrid({ title }) {
                     <span className="text-sm text-gray-600">
                       {product.price}
                     </span>
-                    <Button className="mt-3 w-full">Add to Cart</Button>
+                    {/* <Button className="mt-3 w-full">Add to Cart</Button> */}
                   </CardContent>
                 </Card>
               </CarouselItem>

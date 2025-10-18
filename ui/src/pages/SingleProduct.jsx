@@ -1,4 +1,5 @@
 import BreadcrumbWithCustomSeparator from "@/Comp/BreadCrumb";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 const FreeReturnSlab = () => {
@@ -195,9 +196,9 @@ const SingleProduct = () => {
           </div>
 
           {/* Counter */}
-          <div className="p-6 border border-black inline-block my-8">
+          <div className="p-5 border-2 border-black rounded-lg inline-block my-8">
             <div className="flex gap-10">
-              <button className="border border-black rounded-full">
+              <button className="border border-black rounded-full cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -213,8 +214,8 @@ const SingleProduct = () => {
                   />
                 </svg>
               </button>
-              <span className="text-xl">1</span>
-              <button className="border border-black rounded-full">
+              <span className="text-sm">1</span>
+              <button className="border border-black rounded-full cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -234,6 +235,18 @@ const SingleProduct = () => {
           </div>
 
           {/* Add to Cart and buy now buttons */}
+          <div className="flex gap-8 p-2">
+            <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1">
+              Add to cart
+            </button>
+
+            <button className="bg-white hover:bg-gray-50 text-green-600 font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1 border-2 border-green-700">
+              Buy now
+            </button>
+
+            {/* <button className="">Add to cart</button>
+            <button>Buy Now</button> */}
+          </div>
         </div>
       </div>
     </div>
