@@ -1,6 +1,11 @@
 import BreadcrumbWithCustomSeparator from "@/Comp/BreadCrumb";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Star, User } from "lucide-react";
+import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
+import CounterComp from "@/Comp/CounterComp";
 
 const FreeReturnSlab = () => {
   return (
@@ -109,7 +114,516 @@ const FreeReturnSlab = () => {
   );
 };
 
+function ProductDetailsTabs() {
+  return (
+    <Card className="w-full bg-white shadow-sm">
+      <CardHeader className="border-b p-0">
+        <Tabs defaultValue="description" className="w-full">
+          {/* Tabs Header */}
+          <TabsList className="flex justify-between w-full bg-transparent border-b rounded-none">
+            <TabsTrigger
+              value="description"
+              className="flex-1 text-center py-3 data-[state=active]:text-black text-gray-500 font-medium"
+            >
+              Description
+            </TabsTrigger>
+            <TabsTrigger
+              value="sizeChart"
+              className="flex-1 text-center py-3 data-[state=active]:text-black text-gray-500 font-medium"
+            >
+              Size Chart
+            </TabsTrigger>
+            <TabsTrigger
+              value="reviews"
+              className="flex-1 text-center py-3 data-[state=active]:text-black text-gray-500 font-medium"
+            >
+              Reviews
+            </TabsTrigger>
+            <TabsTrigger
+              value="additional"
+              className="flex-1 text-center py-3 data-[state=active]:text-black text-gray-500 font-medium"
+            >
+              Additional Information
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Tabs Content */}
+          <CardContent className="p-6">
+            <TabsContent value="description" className="mt-0">
+              <CardContent className="p-6 space-y-4 text-gray-700">
+                {/* Title */}
+                <h2 className="text-3xl font-bold text-gray-900">
+                  Napoli 2025–26 Third Jersey
+                </h2>
+
+                {/* Stock Info */}
+                <p className="font-semibold flex items-center gap-2 text-gray-800">
+                  Limited Stock Available ⏱️
+                </p>
+
+                {/* Product Details */}
+                <div className="space-y-2">
+                  <p>
+                    <span className="font-semibold">Catalog Name:</span> Napoli
+                    2025–26 de bruyne Third Jersey
+                  </p>
+                  <p>
+                    <span className="font-semibold">Pattern:</span> Embroidery /
+                    Sublimation Printed
+                  </p>
+                  <p>
+                    <span className="font-semibold">Sleeve Length:</span> Short
+                    Sleeves
+                  </p>
+                  <p>
+                    <span className="font-semibold">Net Quantity (N):</span> 1
+                  </p>
+                  <p>
+                    <span className="font-semibold">Sizes:</span> S, M, L, XL,
+                    XXL
+                  </p>
+                </div>
+
+                {/* Size Info */}
+                <div className="bg-gray-50 rounded-lg p-4 border mt-4">
+                  <p className="font-medium text-gray-800 mb-1">
+                    📏 Size Details:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>M (Chest Size: 38 in, Length Size: 27 in)</li>
+                    <li>L (Chest Size: 40 in, Length Size: 28 in)</li>
+                    <li>XL (Chest Size: 42 in, Length Size: 29 in)</li>
+                  </ul>
+                </div>
+
+                {/* Delivery Info */}
+                <div className="space-y-1 mt-4">
+                  <p>
+                    <span className="font-semibold">Dispatch:</span> 2 Days
+                  </p>
+                  <p>
+                    <span className="font-semibold">Delivery:</span> 7–12 Days
+                  </p>
+                  <p>
+                    <span className="font-semibold">Return:</span> within 7 days
+                    after delivery
+                  </p>
+                </div>
+
+                {/* Product Story */}
+                <div className="space-y-3 mt-6">
+                  <h3 className="text-xl font-bold text-gray-900">
+                    De bruyne Napoli 2025–26 Third Jersey
+                  </h3>
+                  <p>
+                    Elevate your support for Napoli with the exclusive 2025–26
+                    De bruyne third jersey, a tribute to one of football’s most
+                    electrifying talents, Kevin De bruyne.
+                  </p>
+
+                  <h4 className="text-lg font-semibold text-gray-900 mt-4">
+                    Design
+                  </h4>
+                  <p>
+                    This jersey is an authentic reproduction of the one Napoli
+                    players wore during the 2025–26 season. Featuring the club’s
+                    black color scheme with blue accents.
+                  </p>
+                  <p>
+                    This jersey is crafted from high-performance materials and
+                    offers unparalleled comfort, breathability, and durability.
+                    It is engineered to withstand match-day action and everyday
+                    wear demands.
+                  </p>
+
+                  <h4 className="text-lg font-semibold text-gray-900 mt-4">
+                    De Bruyne
+                  </h4>
+                  <p>
+                    Kevin De Bruyne is known for his vision, creativity, and
+                    pinpoint accuracy, making him one of the best midfielders in
+                    the world. This jersey celebrates his contribution to Napoli
+                    and his role in driving the team’s success.
+                  </p>
+
+                  <p>
+                    Join the journey of Napoli and Kevin De Bruyne as they aim
+                    for glory in the 2025–26 season with the exclusive home
+                    jersey. Order now and be part of the excitement as Napoli
+                    continues to make history on the pitch.
+                  </p>
+                </div>
+              </CardContent>
+            </TabsContent>
+
+            <TabsContent value="sizeChart" className="mt-0">
+              <CardContent className="p-6 space-y-5 text-gray-700">
+                <h2 className="text-2xl font-bold text-gray-900">Size Chart</h2>
+                <p className="text-gray-600">
+                  Find your perfect fit using the detailed size guide below.
+                  Measurements are in inches.
+                </p>
+
+                {/* Size Table */}
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border border-gray-200 rounded-lg text-sm">
+                    <thead className="bg-gray-100 text-gray-800">
+                      <tr>
+                        <th className="py-3 px-4 text-left font-semibold border-b">
+                          Size
+                        </th>
+                        <th className="py-3 px-4 text-left font-semibold border-b">
+                          Chest (in)
+                        </th>
+                        <th className="py-3 px-4 text-left font-semibold border-b">
+                          Length (in)
+                        </th>
+                        <th className="py-3 px-4 text-left font-semibold border-b">
+                          Fit Suggestion
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="hover:bg-gray-50">
+                        <td className="py-2 px-4 border-b font-medium text-gray-900">
+                          S
+                        </td>
+                        <td className="py-2 px-4 border-b">36</td>
+                        <td className="py-2 px-4 border-b">26</td>
+                        <td className="py-2 px-4 border-b">Slim Fit</td>
+                      </tr>
+                      <tr className="hover:bg-gray-50">
+                        <td className="py-2 px-4 border-b font-medium text-gray-900">
+                          M
+                        </td>
+                        <td className="py-2 px-4 border-b">38</td>
+                        <td className="py-2 px-4 border-b">27</td>
+                        <td className="py-2 px-4 border-b">Regular Fit</td>
+                      </tr>
+                      <tr className="hover:bg-gray-50">
+                        <td className="py-2 px-4 border-b font-medium text-gray-900">
+                          L
+                        </td>
+                        <td className="py-2 px-4 border-b">40</td>
+                        <td className="py-2 px-4 border-b">28</td>
+                        <td className="py-2 px-4 border-b">Relaxed Fit</td>
+                      </tr>
+                      <tr className="hover:bg-gray-50">
+                        <td className="py-2 px-4 border-b font-medium text-gray-900">
+                          XL
+                        </td>
+                        <td className="py-2 px-4 border-b">42</td>
+                        <td className="py-2 px-4 border-b">29</td>
+                        <td className="py-2 px-4 border-b">Relaxed Fit</td>
+                      </tr>
+                      <tr className="hover:bg-gray-50">
+                        <td className="py-2 px-4 border-b font-medium text-gray-900">
+                          XXL
+                        </td>
+                        <td className="py-2 px-4 border-b">44</td>
+                        <td className="py-2 px-4 border-b">30</td>
+                        <td className="py-2 px-4 border-b">Oversized Fit</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Fit Note */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-blue-800">
+                    💡 <span className="font-semibold">Tip:</span> For a looser
+                    fit, choose one size larger than your usual.
+                  </p>
+                </div>
+              </CardContent>
+            </TabsContent>
+
+            <TabsContent value="reviews" className="mt-0">
+              <CardContent className="p-6 space-y-8 text-gray-700">
+                {/* Header */}
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Customer Reviews
+                  </h2>
+                  <p className="text-gray-600">
+                    See what others are saying about this product.
+                  </p>
+                </div>
+
+                {/* Rating Summary */}
+                <div className="flex flex-col md:flex-row items-center justify-between bg-gray-50 p-5 rounded-lg border space-y-4 md:space-y-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-4xl font-bold text-yellow-500">
+                      4.6
+                    </span>
+                    <div>
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            size={20}
+                            className={
+                              i < 4
+                                ? "fill-yellow-400 text-yellow-400"
+                                : "text-gray-300"
+                            }
+                          />
+                        ))}
+                      </div>
+                      <p className="text-sm text-gray-600">
+                        Based on 128 reviews
+                      </p>
+                    </div>
+                  </div>
+
+                  <button className="bg-black text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-900 transition">
+                    Write a Review
+                  </button>
+                </div>
+
+                {/* Individual Reviews */}
+                <div className="space-y-6">
+                  {/* Review 1 */}
+                  <div className="border-b pb-4">
+                    <div className="flex items-center gap-3 mb-1">
+                      <User className="w-5 h-5 text-gray-600" />
+                      <p className="font-semibold text-gray-900">
+                        Rahul Sharma
+                      </p>
+                    </div>
+                    <div className="flex mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={18}
+                          className={
+                            i < 5
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "text-gray-300"
+                          }
+                        />
+                      ))}
+                    </div>
+                    <p className="text-gray-700">
+                      Great quality! The fabric feels premium and the fit is
+                      perfect for football practice.
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Reviewed on Oct 12, 2025
+                    </p>
+                  </div>
+
+                  {/* Review 2 */}
+                  <div className="border-b pb-4">
+                    <div className="flex items-center gap-3 mb-1">
+                      <User className="w-5 h-5 text-gray-600" />
+                      <p className="font-semibold text-gray-900">Aman Verma</p>
+                    </div>
+                    <div className="flex mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={18}
+                          className={
+                            i < 4
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "text-gray-300"
+                          }
+                        />
+                      ))}
+                    </div>
+                    <p className="text-gray-700">
+                      Delivery took a bit longer than expected, but the product
+                      is authentic and worth it.
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Reviewed on Oct 5, 2025
+                    </p>
+                  </div>
+
+                  {/* Review 3 */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <User className="w-5 h-5 text-gray-600" />
+                      <p className="font-semibold text-gray-900">Kunal Patil</p>
+                    </div>
+                    <div className="flex mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={18}
+                          className={
+                            i < 5
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "text-gray-300"
+                          }
+                        />
+                      ))}
+                    </div>
+                    <p className="text-gray-700">
+                      Amazing detailing and comfort! Looks just like the
+                      official Napoli kit.
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Reviewed on Sept 29, 2025
+                    </p>
+                  </div>
+                </div>
+
+                {/* Review Form Placeholder */}
+                <div className="bg-gray-50 rounded-lg p-5 border">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Want to share your experience?
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    You can add your review and help others make better
+                    decisions.
+                  </p>
+                  <button className="bg-black text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-900 transition">
+                    Add Your Review
+                  </button>
+                </div>
+              </CardContent>
+            </TabsContent>
+
+            <TabsContent value="additional" className="mt-0">
+              <CardContent className="p-6 space-y-6 text-gray-700">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Additional Information
+                </h2>
+                <p className="text-gray-600">
+                  Learn more about the fabric, care instructions, and origin of
+                  your Napoli 2025–26 Third Jersey.
+                </p>
+
+                {/* Key Information */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Material:
+                      </span>{" "}
+                      100% Premium Polyester
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Fit Type:
+                      </span>{" "}
+                      Athletic Fit
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Neck Type:
+                      </span>{" "}
+                      Round Neck
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Sleeve Type:
+                      </span>{" "}
+                      Short Sleeves
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Fabric Type:
+                      </span>{" "}
+                      Breathable & Quick-Dry Mesh
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Occasion:
+                      </span>{" "}
+                      Sports / Casual Wear
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Country of Origin:
+                      </span>{" "}
+                      India
+                    </p>
+                    <p>
+                      <span className="font-semibold text-gray-900">
+                        Package Contents:
+                      </span>{" "}
+                      1 x Jersey
+                    </p>
+                  </div>
+                </div>
+
+                {/* Wash & Care Instructions */}
+                <div className="bg-gray-50 rounded-lg p-5 border">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    Wash & Care Instructions
+                  </h3>
+                  <ul className="list-disc list-inside space-y-1 text-gray-700">
+                    <li>Machine wash cold with similar colors.</li>
+                    <li>Do not bleach or tumble dry.</li>
+                    <li>Line dry in shade.</li>
+                    <li>Iron on low temperature, if needed.</li>
+                    <li>Do not dry clean.</li>
+                  </ul>
+                </div>
+
+                {/* Sustainability or Extra Info */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <p className="text-sm text-green-800">
+                    🌱 <span className="font-semibold">Eco Note:</span> This
+                    jersey is made with eco-friendly dyes and sustainable
+                    manufacturing practices to reduce environmental impact.
+                  </p>
+                </div>
+              </CardContent>
+            </TabsContent>
+          </CardContent>
+        </Tabs>
+      </CardHeader>
+    </Card>
+  );
+}
+
+function BottomFooterSection() {
+  return (
+    <div className="w-full h-40 flex justify-between py-8">
+      <div className="flex flex-col">
+        <span className="text-xl text-black">All over India delivery</span>
+        <span className="text-sm text-gray-400 font-bold">
+          All States Covered
+        </span>
+      </div>
+      <div className="flex flex-col">
+        <span className="text-xl text-black">Secure Payment</span>
+        <span className="text-sm text-gray-400 font-bold">
+          Pay with secure payment methods
+        </span>
+      </div>
+      <div className="flex flex-col">
+        <span className="text-xl text-black">7-day Return Policy</span>
+        <span className="text-sm text-gray-400 font-bold">
+          Products can be returned within 7 days.
+        </span>
+      </div>
+      <div className="flex flex-col">
+        <span className="text-xl text-black">24/7 Support</span>
+        <span className="text-sm text-gray-400 font-bold">
+          We'll respond to you within 24 hours
+        </span>
+      </div>
+    </div>
+  );
+}
+
 const SingleProduct = () => {
+  // Store all images here
+  const images = [
+    "/assets/Images/ProductImg.png",
+    "/assets/Images/ProductImg2.png",
+  ];
+
+  // Track the currently displayed main image
+  const [mainImage, setMainImage] = useState(images[0]);
   return (
     <div className="w-full px-20 py-16">
       {/* <FreeReturnSlab /> */}
@@ -139,11 +653,29 @@ const SingleProduct = () => {
       <div className="flex gap-10 w-full my-5">
         {/* Image */}
         <div className="flex-1">
-          <img
-            src="/assets/Images/ProductImg.png"
-            alt=""
-            className="w-full h-full object-cover rounded "
-          />
+          <div className="w-full">
+            <img
+              src={mainImage}
+              alt="Product"
+              className="w-full h-full object-cover rounded-lg shadow-md transition-all duration-300"
+            />
+          </div>
+
+          <div className="flex gap-4 mt-4 items-center justify-center">
+            {images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Thumbnail ${index}`}
+                onClick={() => setMainImage(img)}
+                className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 transition-all duration-200 ${
+                  mainImage === img
+                    ? "border-[#61894d] scale-105"
+                    : "border-gray-300 hover:scale-105 hover:border-[#61894d]"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="flex-1">
@@ -196,43 +728,7 @@ const SingleProduct = () => {
           </div>
 
           {/* Counter */}
-          <div className="p-5 border-2 border-black rounded-lg inline-block my-8">
-            <div className="flex gap-10">
-              <button className="border border-black rounded-full cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M5 12h14"
-                  />
-                </svg>
-              </button>
-              <span className="text-sm">1</span>
-              <button className="border border-black rounded-full cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
+          <CounterComp />
 
           {/* Add to Cart and buy now buttons */}
           <div className="flex gap-8 p-2">
@@ -247,8 +743,32 @@ const SingleProduct = () => {
             {/* <button className="">Add to cart</button>
             <button>Buy Now</button> */}
           </div>
+
+          <div className="mt-6">
+            <span className="text-sm">
+              Categories: Jersey, Embroidery Jersey, Season Jerseys
+            </span>
+          </div>
         </div>
       </div>
+
+      {/* Additional infomation section */}
+
+      <div>
+        <ProductDetailsTabs />
+      </div>
+
+      {/* You might also like section */}
+
+      <div>
+        <ProductGrid title="You might also like" />
+      </div>
+
+      <hr />
+      <div>
+        <BottomFooterSection />
+      </div>
+      <hr />
     </div>
   );
 };
