@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, User } from "lucide-react";
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import CounterComp from "@/Comp/CounterComp";
+import FunkySection from "@/Comp/FunckySection";
 
 const FreeReturnSlab = () => {
   return (
@@ -762,6 +763,10 @@ const SingleProduct = () => {
 
       <div>
         <ProductGrid title="You might also like" />
+      </div>
+
+      <div className="my-4">
+        <FunkySection />
       </div>
 
       <hr />

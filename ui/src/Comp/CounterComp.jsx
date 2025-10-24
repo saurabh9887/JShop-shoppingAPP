@@ -30,7 +30,7 @@ const CounterComp = () => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
           </svg>
         </button>
-        <span className="text-xl">{count}</span>
+        <span className="text-xl w-3">{count}</span>
         <button
           className="border border-black rounded-full cursor-pointer"
           onClick={() => handleChangeCount(count, "increment")}
