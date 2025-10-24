@@ -5,21 +5,24 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 const slides = [
   {
     image: "/assets/Images/b2.jpg",
-    heading: "Build Your Dream Website",
-    subheading: "Empower your business with modern web design.",
-    cta: "Get Started",
+    heading: "Step Into the Season in Style",
+    subheading:
+      "Discover the latest trends and must-have outfits curated just for you.",
+    cta: "Shop Now",
   },
   {
     image: "/assets/Images/b6.jpg",
-    heading: "Grow Your Online Presence",
-    subheading: "Reach more customers with smart digital solutions.",
-    cta: "Learn More",
+    heading: "Exclusive Deals, Just for You",
+    subheading:
+      "Get premium fashion at irresistible prices — only while stocks last!",
+    cta: "Browse All",
   },
   {
     image: "/assets/Images/b5.jpg",
-    heading: "Design. Develop. Deliver.",
-    subheading: "We craft experiences that inspire.",
-    cta: "Contact Us",
+    heading: "Your Style, Your Squad",
+    subheading:
+      "Sign up and unlock early access, members-only drops, and exclusive perks.",
+    cta: "Join Now",
   },
 ];
 
