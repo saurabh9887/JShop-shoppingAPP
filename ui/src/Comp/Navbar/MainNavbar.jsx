@@ -38,41 +38,66 @@ import {
 import Profile from "../Profile/Profile";
 import LoginDialog from "@/pages/LoginPage";
 
-const components = [
+const categories = [
   {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
+    title: "Sarees",
+    href: "/category/sarees",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "Discover our exclusive collection of sarees — from timeless classics to modern designs, crafted for every occasion.",
   },
   {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
+    title: "Designer Sarees",
+    href: "/categories/designer-sarees",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Premium sarees with intricate detailing, elegant embroidery, and luxurious fabrics — perfect for special events.",
   },
   {
-    title: "Progress",
-    href: "/docs/primitives/progress",
+    title: "Cotton Sarees",
+    href: "/categories/cotton-sarees",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Lightweight, breathable, and perfect for everyday elegance — explore our soft cotton saree range.",
   },
   {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    title: "Silk Sarees",
+    href: "/categories/silk-sarees",
+    description:
+      "Experience traditional luxury with our stunning silk sarees, ideal for weddings and festive occasions.",
   },
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
+    title: "Sports Jerseys",
+    href: "/categories/sports-jerseys",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "Shop authentic sports jerseys inspired by your favorite teams and players — designed for comfort and passion.",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
+    title: "Football Jerseys",
+    href: "/categories/football-jerseys",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Premium football jerseys with high-quality fabric, breathable design, and team-accurate details.",
+  },
+  {
+    title: "Cricket Jerseys",
+    href: "/categories/cricket-jerseys",
+    description:
+      "Official-style cricket jerseys for fans and players — built for performance and pride.",
+  },
+  {
+    title: "Custom Jerseys",
+    href: "/categories/custom-jerseys",
+    description:
+      "Create your own custom jersey with personalized names, numbers, and team designs.",
+  },
+  {
+    title: "Combo Offers",
+    href: "/categories/combo-offers",
+    description:
+      "Exclusive deals on saree and jersey combos — perfect for gifting or building your collection.",
+  },
+  {
+    title: "New Arrivals",
+    href: "/categories/new-arrivals",
+    description:
+      "Stay ahead of trends with our latest saree and jersey collections freshly added every week.",
   },
 ];
 
@@ -83,6 +108,11 @@ function NavigationMenuDemo() {
     <NavigationMenu viewport={false} className="hidden md:flex">
       <NavigationMenuList>
         <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/">Home</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <NavigationMenuTrigger>Home</NavigationMenuTrigger>
           <NavigationMenuContent className="z-[60]">
             <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -112,12 +142,12 @@ function NavigationMenuDemo() {
               </ListItem>
             </ul>
           </NavigationMenuContent>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
           <NavigationMenuContent className="z-[60]">
             <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {components.map((component) => (
+              {categories.map((component) => (
                 <ListItem
                   key={component.title}
                   title={component.title}
@@ -128,11 +158,6 @@ function NavigationMenuDemo() {
               ))}
             </ul>
           </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/docs">Docs</Link>
-          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>List</NavigationMenuTrigger>
