@@ -100,8 +100,14 @@ export function ProductGrid({ title }) {
                 className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 onClick={() => navigate("shop/4")}
               >
-                <Card className="h-full hover:shadow-2xl cursor-pointer transition-shadow duration-300">
-                  <CardContent className="flex flex-col items-center justify-between h-full ">
+                <Card
+                  className="h-full hover:shadow-2xl cursor-pointer transition-shadow duration-300"
+                  style={{ padding: "0" }}
+                >
+                  <CardContent
+                    style={{ padding: "0" }}
+                    className="flex flex-col items-center justify-between h-full "
+                  >
                     <img
                       src={product.image}
                       alt={product.name}

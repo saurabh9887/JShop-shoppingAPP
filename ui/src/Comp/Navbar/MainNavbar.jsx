@@ -7,6 +7,7 @@ import {
   CircleHelpIcon,
   CircleIcon,
   Menu,
+  ShoppingCart,
   User,
 } from "lucide-react";
 
@@ -37,6 +38,7 @@ import {
 
 import Profile from "../Profile/Profile";
 import LoginDialog from "@/pages/LoginPage";
+import { useCartStore } from "@/Store/CartStore";
 
 const categories = [
   {
@@ -250,25 +252,40 @@ function NavigationMenuDemo() {
 }
 
 const RightNavbar = () => {
+  const navigate = useNavigate();
+  const { cartItems } = useCartStore();
   const [showNewDialog, setShowNewDialog] = React.useState(false);
   const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
 
   return (
     <div>
       {user ? (
-        <DropdownMenu className="z-auto" modal={false}>
-          <DropdownMenuTrigger asChild>
-            <User className="border border-black rounded-full cursor-pointer" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-40 z-[200]" align="end">
-            <DropdownMenuGroup>
-              <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-4">
+          {/* Cart Icon */}
+          <div className="relative cursor-pointer">
+            <ShoppingCart onClick={() => navigate("/cart")} />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                {cartItems.length}
+              </span>
+            )}
+          </div>
+
+          {/* Profile Dropdown */}
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild>
+              <User className="w-6 h-6 border border-black rounded-full cursor-pointer" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-40 z-[200]" align="end">
+              <DropdownMenuGroup>
+                <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       ) : (
         <Button
           className="bg-green-600 text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import SingleProduct from "./pages/SingleProduct";
 import Layout from "./Comp/Layout";
 import CategoryPage from "./pages/Categories";
+import CartPage from "./pages/Cart";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="shop/:id" element={<SingleProduct />} />
           <Route path="category/:cat" element={<CategoryPage />} />
+          <Route path="cart" element={<CartPage />} />
           {/* <Route path="login" element={<LoginPage />} /> */}
         </Route>
       </Routes>

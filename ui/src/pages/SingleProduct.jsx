@@ -7,6 +7,7 @@ import { Star, User } from "lucide-react";
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import CounterComp from "@/Comp/CounterComp";
 import FunkySection from "@/Comp/FunckySection";
+import { useCartStore } from "@/Store/CartStore";
 
 const FreeReturnSlab = () => {
   return (
@@ -116,6 +117,7 @@ const FreeReturnSlab = () => {
 };
 
 function ProductDetailsTabs() {
+  const { addToCart } = useCartStore();
   return (
     <Card className="w-full bg-white shadow-sm">
       <CardHeader className="border-b p-0">
@@ -618,13 +620,33 @@ function BottomFooterSection() {
 
 const SingleProduct = () => {
   // Store all images here
-  const images = [
-    "/assets/Images/ProductImg.png",
-    "/assets/Images/ProductImg2.png",
-  ];
 
   // Track the currently displayed main image
-  const [mainImage, setMainImage] = useState(images[0]);
+
+  const { cartItems, addToCart } = useCartStore();
+
+  console.log(cartItems);
+
+  const [product, setProduct] = useState({
+    id: 101,
+    name: "Elegant Silk Saree - Crimson Red",
+    description:
+      "A luxurious handwoven silk saree featuring rich crimson hues and a golden zari border, perfect for festive and traditional occasions.",
+    price: 2899,
+    category: "Sarees",
+    images: ["/assets/Images/ProductImg.png", "/assets/Images/ProductImg2.png"],
+    stock: 12,
+    rating: 4.7,
+    reviews: 126,
+    discount: 10, // percentage
+    tags: ["ethnic", "silk", "traditional", "women"],
+
+    // ✅ these below fields make it cart-suitable
+    quantity: 1,
+    addedAt: new Date().toISOString(), // optional, helps for tracking
+  });
+  const [mainImage, setMainImage] = useState(product.images[0]);
+
   return (
     <div className="w-full px-20 py-16">
       {/* <FreeReturnSlab /> */}
@@ -663,7 +685,7 @@ const SingleProduct = () => {
           </div>
 
           <div className="flex gap-4 mt-4 items-center justify-center">
-            {images.map((img, index) => (
+            {product.images.map((img, index) => (
               <img
                 key={index}
                 src={img}
@@ -733,7 +755,10 @@ const SingleProduct = () => {
 
           {/* Add to Cart and buy now buttons */}
           <div className="flex gap-8 p-2">
-            <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1">
+            <button
+              onClick={() => addToCart(product)}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1"
+            >
               Add to cart
             </button>
 
