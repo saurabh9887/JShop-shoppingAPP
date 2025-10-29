@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function FunkySection() {
   return (
-    <section className="relative overflow-hidden bg-gray-50 text-gray-900 py-20">
+    <section className="relative overflow-hidden bg-white text-gray-900 py-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_20%_20%,white,transparent_25%),radial-gradient(circle_at_80%_80%,white,transparent_25%)]"></div>
 

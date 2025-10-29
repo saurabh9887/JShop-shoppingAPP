@@ -109,7 +109,7 @@ function NavigationMenuDemo() {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/">Home</Link>
+            <Link to="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         {/* <NavigationMenuItem>
@@ -158,6 +158,13 @@ function NavigationMenuDemo() {
               ))}
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <a href="#contact-us" className="scroll-smooth">
+              Contact Us
+            </a>
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>List</NavigationMenuTrigger>

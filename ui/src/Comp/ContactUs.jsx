@@ -1,80 +1,108 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import React from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
-export default function ContactUs() {
+const ContactUs = () => {
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative"
-      style={{
-        backgroundImage: "url('/assets/Images/b1.jpg')", // <-- your background image here
-      }}
-    >
-      {/* Overlay for better contrast */}
-      <div className="absolute inset-0 bg-black/50"></div>
+    <section id="contact-us" className="relative w-full bg-gray-50 py-20 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        {/* Left Section - Info */}
+        <motion.div
+          className="flex-1 space-y-6"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <h2 className="text-4xl font-bold text-gray-800">Let’s Connect 💬</h2>
+          <p className="text-gray-600 leading-relaxed max-w-md">
+            Have questions, feedback, or just want to say hi? Our team at{" "}
+            <span className="text-[#61894d] font-semibold">JShop</span> would
+            love to hear from you. Fill out the form or reach out using the
+            details below.
+          </p>
 
-      <div className="relative z-10 w-[90%] md:w-[70%] lg:w-[50%]">
-        <Card className="backdrop-blur-md bg-white/80 border-none shadow-xl rounded-2xl p-8">
-          <CardContent className="space-y-5">
-            <h3 className="text-3xl font-bold text-gray-900 text-center">
-              Contact Us
-            </h3>
-            <p className="text-gray-700 text-center mb-6">
-              We'd love to hear from you. Fill out the form and we'll get back
-              to you soon!
+          <div className="space-y-3 text-gray-700">
+            <p>
+              📍 <span className="font-medium">Address:</span> Pune,
+              Maharashtra, India
             </p>
+            <p>
+              📧 <span className="font-medium">Email:</span> support@jshop.in
+            </p>
+            <p>
+              📞 <span className="font-medium">Phone:</span> +91 98765 43210
+            </p>
+          </div>
+        </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  placeholder="Enter your first name"
-                  className="focus-visible:ring-black"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  placeholder="Enter your last name"
-                  className="focus-visible:ring-black"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="mobile">Mobile Number</Label>
-              <Input
-                id="mobile"
-                type="tel"
-                placeholder="Enter your mobile number"
-                className="focus-visible:ring-black"
+        {/* Right Section - Form */}
+        <motion.div
+          className="flex-1 bg-white shadow-md rounded-2xl p-8"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <form className="space-y-5">
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Your Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your name"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61894d]"
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
-              <Input
-                id="email"
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Email Address
+              </label>
+              <input
                 type="email"
                 placeholder="Enter your email"
-                className="focus-visible:ring-black"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61894d]"
               />
             </div>
 
-            <div className="pt-4">
-              <Button className="w-full bg-black text-white hover:bg-gray-900">
-                Submit
-              </Button>
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Message
+              </label>
+              <textarea
+                rows="4"
+                placeholder="Write your message..."
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#61894d]"
+              ></textarea>
             </div>
-          </CardContent>
-        </Card>
+
+            <Button
+              type="submit"
+              className="w-full bg-[#61894d] text-white font-semibold py-3 rounded-lg hover:bg-green-700 transition-all"
+            >
+              Send Message
+            </Button>
+          </form>
+        </motion.div>
       </div>
-    </div>
+
+      {/* Floating Decoration */}
+      <motion.div
+        animate={{ y: [0, 20, 0], opacity: [0.6, 0.9, 0.6] }}
+        transition={{ duration: 6, repeat: Infinity }}
+        className="absolute bottom-10 left-10 w-24 h-24 bg-[#61894d]/20 rounded-full blur-3xl"
+      ></motion.div>
+      <motion.div
+        animate={{ y: [0, -20, 0], opacity: [0.6, 0.9, 0.6] }}
+        transition={{ duration: 7, repeat: Infinity }}
+        className="absolute top-10 right-10 w-24 h-24 bg-gray-300/30 rounded-full blur-3xl"
+      ></motion.div>
+    </section>
   );
-}
+};
+
+export default ContactUs;

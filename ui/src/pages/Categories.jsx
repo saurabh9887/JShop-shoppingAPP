@@ -11,11 +11,13 @@ import {
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import FunkySection from "@/Comp/FunckySection";
 import FAQSection from "@/Comp/FAQSection";
+import { useNavigate } from "react-router-dom";
 
 const CategoryPage = ({
   title = "Sarees",
   description = "Discover our exclusive range of sarees crafted for elegance, comfort, and tradition.",
 }) => {
+  const navigate = useNavigate();
   const products = [
     {
       name: "Silk Saree - Royal Blue",
@@ -134,6 +136,7 @@ const CategoryPage = ({
                     ₹{product.price}
                   </p>
                   <Button
+                    onClick={() => navigate("/shop/4")} //Send product from here
                     variant="default"
                     className="bg-gray-900 dark:bg-white dark:text-gray-900 hover:opacity-90"
                   >

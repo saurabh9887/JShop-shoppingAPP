@@ -18,8 +18,8 @@ const Home = () => {
       <ProductGrid title="New Arrivals" />
       <ProductGrid title="Today's Offers" />
       <Testimonials />
-      {/* <ContactUs /> */}
       <FAQSection />
+      <ContactUs />
       <FunkySection />
     </div>
   );
