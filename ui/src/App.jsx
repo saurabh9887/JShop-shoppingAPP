@@ -7,6 +7,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Layout from "./Comp/Layout";
 import CategoryPage from "./pages/Categories";
 import CartPage from "./pages/Cart";
+import { Toaster } from "sonner";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
@@ -22,6 +23,8 @@ const App = () => {
           {/* <Route path="login" element={<LoginPage />} /> */}
         </Route>
       </Routes>
+      {/* <Toaster richColors position="top-center" /> */}
+      <Toaster position="top-center" />
     </BrowserRouter>
   );
 };

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-const CounterComp = () => {
-  const [count, setCount] = useState(0);
-
+const CounterComp = ({ count, setCount }) => {
   const handleChangeCount = (count, val) => {
     if (val === "increment") {
       setCount(count + 1);

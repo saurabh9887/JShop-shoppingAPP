@@ -1,13 +1,14 @@
 import BreadcrumbWithCustomSeparator from "@/Comp/BreadCrumb";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, User } from "lucide-react";
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import CounterComp from "@/Comp/CounterComp";
 import FunkySection from "@/Comp/FunckySection";
 import { useCartStore } from "@/Store/CartStore";
+import { toast } from "sonner";
 
 const FreeReturnSlab = () => {
   return (
@@ -624,12 +625,13 @@ const SingleProduct = () => {
   // Track the currently displayed main image
 
   const { cartItems, addToCart } = useCartStore();
+  const [count, setCount] = useState(0);
 
   console.log(cartItems);
 
   const [product, setProduct] = useState({
     id: 101,
-    name: "Elegant Silk Saree - Crimson Red",
+    name: "Ohh kevin debruyn",
     description:
       "A luxurious handwoven silk saree featuring rich crimson hues and a golden zari border, perfect for festive and traditional occasions.",
     price: 2899,
@@ -642,10 +644,53 @@ const SingleProduct = () => {
     tags: ["ethnic", "silk", "traditional", "women"],
 
     // ✅ these below fields make it cart-suitable
-    quantity: 1,
+    quantity: count,
     addedAt: new Date().toISOString(), // optional, helps for tracking
   });
   const [mainImage, setMainImage] = useState(product.images[0]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  const handleAddToCart = () => {
+    debugger;
+    if (count === 0) {
+      toast.warning("Please add atleast one product to the cart!", {
+        style: {
+          background: "#c9364a", // slate-800
+          color: "white", // amber-400
+          alignContent: "center",
+          fontSize: "15px",
+        },
+      });
+      return;
+    } else if (count === 1) {
+      if (
+        cartItems.length !== 0 &&
+        cartItems.filter((item) => item.id === product.id)
+      ) {
+        return;
+      }
+      toast.success("Product successfully added to the cart", {
+        style: {
+          background: "#61894d", // slate-800
+          color: "white", // amber-400
+          alignContent: "center",
+          fontSize: "15px",
+        },
+      });
+    }
+    addToCart(product);
+
+    // toast("Event has been created", {
+    //   description: "Sunday, December 03, 2023 at 9:00 AM",
+    //   action: {
+    //     label: "Undo",
+    //     onClick: () => console.log("Undo"),
+    //   },
+    // });
+  };
 
   return (
     <div className="w-full px-20 py-16">
@@ -751,12 +796,12 @@ const SingleProduct = () => {
           </div>
 
           {/* Counter */}
-          <CounterComp />
+          <CounterComp count={count} setCount={setCount} />
 
           {/* Add to Cart and buy now buttons */}
           <div className="flex gap-8 p-2">
             <button
-              onClick={() => addToCart(product)}
+              onClick={handleAddToCart}
               className="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1"
             >
               Add to cart

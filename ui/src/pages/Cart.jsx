@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, getTotal } =
     useCartStore();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const totalPrice = getTotal();
   const discount = Math.round(totalPrice * 0.1);

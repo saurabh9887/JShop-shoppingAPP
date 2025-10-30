@@ -262,8 +262,11 @@ const RightNavbar = () => {
       {user ? (
         <div className="flex items-center gap-4">
           {/* Cart Icon */}
-          <div className="relative cursor-pointer">
-            <ShoppingCart onClick={() => navigate("/cart")} />
+          <div
+            className="relative cursor-pointer"
+            onClick={() => navigate("/cart")}
+          >
+            <ShoppingCart />
             {cartItems.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
                 {cartItems.length}
