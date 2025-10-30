@@ -626,6 +626,8 @@ const SingleProduct = () => {
 
   const { cartItems, addToCart } = useCartStore();
   const [count, setCount] = useState(0);
+  const [activeSize, setActiveSize] = useState(0);
+  const sizes = ["S", "M", "L", "XL", "XXL"];
 
   console.log(cartItems);
 
@@ -642,6 +644,7 @@ const SingleProduct = () => {
     reviews: 126,
     discount: 10, // percentage
     tags: ["ethnic", "silk", "traditional", "women"],
+    size: activeSize,
 
     // ✅ these below fields make it cart-suitable
     quantity: count,
@@ -777,21 +780,19 @@ const SingleProduct = () => {
             <span className="text-gray-700 ">Size</span>
             {/* Sizes */}
             <div className="flex gap-8">
-              <span className="border border-green-600 py-1 px-6 text-sm cursor-pointer hover:bg-green-600 hover:text-white">
-                S
-              </span>
-              <span className="border border-green-600 py-1 px-6 text-sm cursor-pointer hover:bg-green-600 hover:text-white">
-                M
-              </span>
-              <span className="border border-green-600 py-1 px-6 text-sm cursor-pointer hover:bg-green-600 hover:text-white">
-                L
-              </span>
-              <span className="border border-green-600 py-1 px-6 text-sm cursor-pointer hover:bg-green-600 hover:text-white">
-                XL
-              </span>
-              <span className="border border-green-600 py-1 px-6 text-sm cursor-pointer hover:bg-green-600 hover:text-white">
-                XXL
-              </span>
+              {sizes.map((size) => (
+                <span
+                  className={`border border-green-600 py-1 px-6 text-sm cursor-pointer rounded transition-all
+              ${
+                activeSize === size
+                  ? "bg-green-600 text-white"
+                  : "text-gray-800 hover:bg-green-600 hover:text-white"
+              }`}
+                  onClick={() => setActiveSize(size)}
+                >
+                  {size}
+                </span>
+              ))}
             </div>
           </div>
 

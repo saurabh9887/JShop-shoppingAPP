@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,12 +18,17 @@ const CategoryPage = ({
   description = "Discover our exclusive range of sarees crafted for elegance, comfort, and tradition.",
 }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const products = [
     {
       name: "Silk Saree - Royal Blue",
       price: 2599,
       desc: "Elegant pure silk saree with golden border.",
-      image: "/assets/Images/Saree/s1.webp",
+      image: "/assets/Images/Saree/s7.webp",
       tag: "New Arrival",
     },
     {

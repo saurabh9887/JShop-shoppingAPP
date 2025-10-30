@@ -8,9 +8,12 @@ import HeaderTop from "@/Comp/Navbar/HeaderTop";
 import MainNavbar from "@/Comp/Navbar/MainNavbar";
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import { Testimonials } from "@/Comp/Testimonials/Testimonials";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <div className="">
       <HeroSlider />
