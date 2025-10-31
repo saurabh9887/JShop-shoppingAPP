@@ -8,6 +8,7 @@ import Layout from "./Comp/Layout";
 import CategoryPage from "./pages/Categories";
 import CartPage from "./pages/Cart";
 import { Toaster } from "sonner";
+import CheckoutPage from "./pages/Checkout";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="shop/:id" element={<SingleProduct />} />
           <Route path="category/:cat" element={<CategoryPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
           {/* <Route path="login" element={<LoginPage />} /> */}
         </Route>
       </Routes>
