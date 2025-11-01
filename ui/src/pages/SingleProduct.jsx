@@ -9,6 +9,7 @@ import CounterComp from "@/Comp/CounterComp";
 import FunkySection from "@/Comp/FunckySection";
 import { useCartStore } from "@/Store/CartStore";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const FreeReturnSlab = () => {
   return (
@@ -625,7 +626,7 @@ const SingleProduct = () => {
   // Track the currently displayed main image
 
   const { cartItems, addToCart } = useCartStore();
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [activeSize, setActiveSize] = useState(0);
   const sizes = ["S", "M", "L", "XL", "XXL"];
 
@@ -651,6 +652,7 @@ const SingleProduct = () => {
     addedAt: new Date().toISOString(), // optional, helps for tracking
   });
   const [mainImage, setMainImage] = useState(product.images[0]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -808,7 +810,10 @@ const SingleProduct = () => {
               Add to cart
             </button>
 
-            <button className="bg-white hover:bg-gray-50 text-green-600 font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1 border-2 border-green-700">
+            <button
+              onClick={() => navigate("/checkout")}
+              className="bg-white hover:bg-gray-50 text-green-600 font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1 border-2 border-green-700"
+            >
               Buy now
             </button>
 

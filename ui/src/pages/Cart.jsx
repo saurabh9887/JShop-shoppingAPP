@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, getTotal } =
     useCartStore();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -109,7 +112,10 @@ const CartPage = () => {
 
             {/* Checkout */}
             <div className="mt-8 flex justify-end">
-              <button className="bg-black text-white px-8 py-2 rounded-lg hover:bg-gray-800 transition">
+              <button
+                onClick={() => navigate("/checkout")}
+                className="bg-black text-white px-8 py-2 rounded-lg hover:bg-gray-800 transition"
+              >
                 Checkout
               </button>
             </div>

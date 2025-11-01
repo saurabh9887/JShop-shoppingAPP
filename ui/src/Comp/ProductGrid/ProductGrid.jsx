@@ -117,7 +117,7 @@ export function ProductGrid({ title }) {
                     <span className="text-base sm:text-lg font-semibold text-center">
                       {product.name}
                     </span>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-gray-600 py-4">
                       {product.price}
                     </span>
                     {/* <Button className="mt-3 w-full">Add to Cart</Button> */}
