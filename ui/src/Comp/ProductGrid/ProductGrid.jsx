@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -44,33 +44,63 @@ export function ProductGrid({ title }) {
           plugins={[plugin.current]}
         >
           <CarouselContent>
-            {products.map((product) => (
+            {products.map((product, index) => (
               <CarouselItem
                 key={product.id}
                 className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 onClick={() => navigate("shop/4")}
               >
                 <Card
-                  className="h-full hover:shadow-2xl cursor-pointer transition-shadow duration-300"
-                  style={{ padding: "0" }}
+                  key={index}
+                  className="overflow-hidden min-h-[550px] hover:shadow-xl transition-all duration-300 dark:bg-gray-800"
                 >
-                  <CardContent
-                    style={{ padding: "0" }}
-                    className="flex flex-col items-center justify-between h-full "
-                  >
+                  <div className="relative">
                     <img
                       src={product.image}
                       alt={product.name}
-                      style={{ borderRadius: "5px 5px 0px 0px" }}
-                      className="w-full h-40 sm:h-48 object-cover mb-3"
+                      className="w-full h-64 object-cover"
                     />
-                    <span className="text-base sm:text-lg font-semibold text-center px-3">
+                    {product.tag && (
+                      <span className="absolute top-3 left-3 bg-pink-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        {product.tag}
+                      </span>
+                    )}
+                  </div>
+
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold text-gray-800 dark:text-white">
                       {product.name}
-                    </span>
-                    <span className="text-sm text-gray-600 py-4">
-                      {product.price}
-                    </span>
-                    {/* <Button className="mt-3 w-full">Add to Cart</Button> */}
+                    </CardTitle>
+                    {product.category && (
+                      <p className="text-xs text-gray-500">
+                        {product.category}
+                      </p>
+                    )}
+                  </CardHeader>
+
+                  <CardContent>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+                      {product.desc}
+                    </p>
+
+                    {product.rating && (
+                      <p className="text-yellow-500 text-sm mb-2">
+                        ⭐ {product.rating}/5
+                      </p>
+                    )}
+
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold text-lg text-gray-900 dark:text-gray-200">
+                        ₹{product.price}
+                      </p>
+                      <Button
+                        onClick={() => navigate(`/shop/${product.id}`)}
+                        variant="default"
+                        className="bg-gray-900 dark:bg-white dark:text-gray-900 hover:opacity-90"
+                      >
+                        View
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </CarouselItem>

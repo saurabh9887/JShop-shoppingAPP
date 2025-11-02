@@ -1,48 +1,76 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const AboutUs = () => {
   return (
-    <section className="w-full bg-gray-50 dark:bg-gray-900 py-16 px-8">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        {/* Image Section */}
-        <div className="flex-1">
-          <img
-            src="/assets/Images/b1.jpg"
-            alt="About Us"
-            className=" shadow-lg w-full object-cover"
-          />
-        </div>
+    <section className="w-full bg-gray-50 dark:bg-gray-900 py-20 px-6 md:px-10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-20">
+        {/* Left: Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex-1"
+        >
+          <Card className="overflow-hidden rounded-2xl shadow-lg border-none">
+            <CardContent className="p-0">
+              <img
+                src="/assets/Images/aboutus2.jpg"
+                alt="About JShop"
+                className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        {/* Text Section */}
-        <div className="flex-1 text-center md:text-left space-y-2">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
-            About Us
+        {/* Right: Text */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex-1 text-center md:text-left space-y-5"
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-white leading-tight">
+            We Don’t Just Sell Clothes — <br />
+            <span className="text-[#61894d]">We Shape Confidence.</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            At <span className="font-semibold text-[#61894d]">JShop</span>, we
-            believe fashion should be more than just clothing — it’s a form of
-            self-expression. Founded with a passion for style, comfort, and
-            sustainability, we bring you a curated collection of high-quality
-            apparel designed to make you feel confident every day.
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            At <span className="font-semibold text-[#61894d]">JShop</span>,
+            fashion isn’t about trends — it’s about *you*. Our mission is to
+            bring timeless design and sustainable comfort together, helping you
+            express who you are without saying a word.
           </p>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            From timeless classics to modern trends, every piece in our
-            collection is crafted with care and attention to detail. Our mission
-            is simple — to make premium fashion accessible, effortless, and
-            enjoyable for everyone.
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            From handcrafted sarees to premium jerseys, every product in our
+            collection reflects passion, precision, and authenticity. Proudly
+            made in India. Loved worldwide.
           </p>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            We’re proud to be a{" "}
-            <span className="font-medium">homegrown Indian brand</span>, trusted
-            by thousands of customers who value quality and authenticity.
-            Whether you're dressing up for a special occasion or keeping it
-            casual, we’re here to help you look and feel your best — always.
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            Join thousands of JShop customers redefining how modern India
+            dresses — one outfit at a time.
           </p>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-            Join us on our journey to redefine online shopping — one outfit at a
-            time.
-          </p>
-        </div>
+
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="pt-4 inline-block"
+          >
+            <Button
+              size="lg"
+              className="bg-[#61894d] text-white font-semibold px-8 py-6 rounded-full hover:bg-[#4e703e]"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              Explore Collection
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

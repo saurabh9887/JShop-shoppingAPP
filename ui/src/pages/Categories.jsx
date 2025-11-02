@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,61 +11,35 @@ import {
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import FunkySection from "@/Comp/FunckySection";
 import FAQSection from "@/Comp/FAQSection";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { FootballCatList, SareeCatList } from "@/Data/Products";
 
-const CategoryPage = ({
-  title = "Sarees",
-  description = "Discover our exclusive range of sarees crafted for elegance, comfort, and tradition.",
-}) => {
+const CategoryPage = () => {
   const navigate = useNavigate();
+  const { cat } = useParams();
+  const [catList, setCatList] = useState([]);
+  const [PageTitle, setPageTitle] = useState("");
+  const [PageDescription, setPageDescription] = useState("");
+
+  useEffect(() => {
+    if (cat === "sarees") {
+      setCatList(SareeCatList);
+      setPageTitle("Sarees");
+      setPageDescription(
+        "Discover our exclusive range of sarees crafted for elegance, comfort, and tradition."
+      );
+    } else if (cat === "football-jerseys") {
+      setCatList(FootballCatList);
+      setPageTitle("Football Jerseys");
+      setPageDescription(
+        "Premium football jerseys with high-quality fabric, breathable design, and team-accurate details."
+      );
+    }
+  }, [cat]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-
-  const products = [
-    {
-      name: "Silk Saree - Royal Blue",
-      price: 2599,
-      desc: "Elegant pure silk saree with golden border.",
-      image: "/assets/Images/Saree/s7.webp",
-      tag: "New Arrival",
-    },
-    {
-      name: "Cotton Saree - Peach",
-      price: 1499,
-      desc: "Lightweight cotton saree for daily wear.",
-      image: "/assets/Images/Saree/s2.webp",
-    },
-    {
-      name: "Designer Saree - Red",
-      price: 3299,
-      desc: "Premium embroidered designer saree.",
-      image: "/assets/Images/Saree/s3.webp",
-      tag: "Trending",
-    },
-    {
-      name: "Cotton Saree - Gray",
-      price: 2599,
-      desc: "Elegant pure silk saree with golden border.",
-      image: "/assets/Images/Saree/s4.webp",
-      tag: "New Arrival",
-    },
-    {
-      name: "Designer Saree - Red",
-      price: 3299,
-      desc: "Premium embroidered designer saree.",
-      image: "/assets/Images/Saree/s3.webp",
-      tag: "Trending",
-    },
-    {
-      name: "Designer Saree - Red",
-      price: 3299,
-      desc: "Premium embroidered designer saree.",
-      image: "/assets/Images/Saree/s7.webp",
-      tag: "Trending",
-    },
-  ];
 
   return (
     <>
@@ -73,10 +47,10 @@ const CategoryPage = ({
         {/* Banner Section */}
         <div className="max-w-6xl mx-auto text-center px-4 mb-10">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            {title}
+            {PageTitle}
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
-            {description}
+            {PageDescription}
           </p>
         </div>
 
@@ -107,7 +81,7 @@ const CategoryPage = ({
 
         {/* Product Grid */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
-          {products.map((product, index) => (
+          {catList.map((product, index) => (
             <Card
               key={index}
               className="overflow-hidden hover:shadow-xl transition-all duration-300 dark:bg-gray-800"

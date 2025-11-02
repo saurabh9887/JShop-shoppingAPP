@@ -14,7 +14,7 @@ const ContactUs = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
         >
           <h2 className="text-4xl font-bold text-gray-800">Let’s Connect 💬</h2>
           <p className="text-gray-600 leading-relaxed max-w-md">
