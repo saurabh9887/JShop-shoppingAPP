@@ -3,7 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Star, User } from "lucide-react";
+import {
+  Headphones,
+  RotateCcw,
+  ShieldCheck,
+  Star,
+  Truck,
+  User,
+} from "lucide-react";
 import { ProductGrid } from "@/Comp/ProductGrid/ProductGrid";
 import CounterComp from "@/Comp/CounterComp";
 import FunkySection from "@/Comp/FunckySection";
@@ -591,28 +598,39 @@ function ProductDetailsTabs() {
 
 function BottomFooterSection() {
   return (
-    <div className="w-full h-40 flex justify-between py-8">
-      <div className="flex flex-col">
-        <span className="text-xl text-black">All over India delivery</span>
-        <span className="text-sm text-gray-400 font-bold">
+    <div className="w-full h-40 flex justify-between py-8 px-10 bg-gray-50">
+      <div className="flex flex-col items-center text-center">
+        <Truck className="w-8 h-8 text-black mb-2" />
+        <span className="text-lg font-semibold text-black">
+          All over India delivery
+        </span>
+        <span className="text-sm text-gray-500 font-medium">
           All States Covered
         </span>
       </div>
-      <div className="flex flex-col">
-        <span className="text-xl text-black">Secure Payment</span>
-        <span className="text-sm text-gray-400 font-bold">
+
+      <div className="flex flex-col items-center text-center">
+        <ShieldCheck className="w-8 h-8 text-black mb-2" />
+        <span className="text-lg font-semibold text-black">Secure Payment</span>
+        <span className="text-sm text-gray-500 font-medium">
           Pay with secure payment methods
         </span>
       </div>
-      <div className="flex flex-col">
-        <span className="text-xl text-black">7-day Return Policy</span>
-        <span className="text-sm text-gray-400 font-bold">
-          Products can be returned within 7 days.
+
+      <div className="flex flex-col items-center text-center">
+        <RotateCcw className="w-8 h-8 text-black mb-2" />
+        <span className="text-lg font-semibold text-black">
+          7-day Return Policy
+        </span>
+        <span className="text-sm text-gray-500 font-medium">
+          Products can be returned within 7 days
         </span>
       </div>
-      <div className="flex flex-col">
-        <span className="text-xl text-black">24/7 Support</span>
-        <span className="text-sm text-gray-400 font-bold">
+
+      <div className="flex flex-col items-center text-center">
+        <Headphones className="w-8 h-8 text-black mb-2" />
+        <span className="text-lg font-semibold text-black">24/7 Support</span>
+        <span className="text-sm text-gray-500 font-medium">
           We'll respond to you within 24 hours
         </span>
       </div>
@@ -627,24 +645,23 @@ const SingleProduct = () => {
 
   const { cartItems, addToCart } = useCartStore();
   const [count, setCount] = useState(1);
-  const [activeSize, setActiveSize] = useState(0);
+  const [activeSize, setActiveSize] = useState("");
   const sizes = ["S", "M", "L", "XL", "XXL"];
 
   console.log(cartItems);
 
   const [product, setProduct] = useState({
     id: 101,
-    name: "Ohh kevin debruyn",
+    name: "Napoli 2025-26 De Bruyne Third Jersey",
     description:
-      "A luxurious handwoven silk saree featuring rich crimson hues and a golden zari border, perfect for festive and traditional occasions.",
-    price: 2899,
-    category: "Sarees",
+      "This jersey is an authentic reproduction of the one Napoli players wore during the 2025–26 season. Featuring the club’s black color scheme with blue accents.",
+    price: 899,
+    category: "Jersey",
     images: ["/assets/Images/ProductImg.png", "/assets/Images/ProductImg2.png"],
     stock: 12,
     rating: 4.7,
     reviews: 126,
-    discount: 10, // percentage
-    tags: ["ethnic", "silk", "traditional", "women"],
+    discount: 25, // percentage
     size: activeSize,
 
     // ✅ these below fields make it cart-suitable
@@ -659,7 +676,29 @@ const SingleProduct = () => {
   }, []);
 
   const handleAddToCart = () => {
-    debugger;
+    // debugger;
+
+    if (cartItems.length !== 0) return;
+
+    const finalProduct = {
+      ...product,
+      size: activeSize,
+      quantity: count,
+      addedAt: new Date().toISOString(),
+    };
+
+    if (finalProduct.size === "") {
+      toast.warning("Please select size befor you proceed", {
+        style: {
+          background: "#c9364a", // slate-800
+          color: "white", // amber-400
+          alignContent: "center",
+          fontSize: "15px",
+        },
+      });
+      return;
+    }
+
     if (count === 0) {
       toast.warning("Please add atleast one product to the cart!", {
         style: {
@@ -670,23 +709,25 @@ const SingleProduct = () => {
         },
       });
       return;
-    } else if (count === 1) {
-      if (
-        cartItems.length !== 0 &&
-        cartItems.filter((item) => item.id === product.id)
-      ) {
-        return;
-      }
-      toast.success("Product successfully added to the cart", {
-        style: {
-          background: "#61894d", // slate-800
-          color: "white", // amber-400
-          alignContent: "center",
-          fontSize: "15px",
-        },
-      });
     }
-    addToCart(product);
+    // else if (count === 1) {
+    //   if (
+    //     cartItems.length !== 0 &&
+    //     cartItems.filter((item) => item.id === product.id)
+    //   ) {
+    //     return;
+    //   }
+    //   toast.success("Product successfully added to the cart", {
+    //     style: {
+    //       background: "#61894d", // slate-800
+    //       color: "white", // amber-400
+    //       alignContent: "center",
+    //       fontSize: "15px",
+    //     },
+    //   });
+    // }
+
+    addToCart(finalProduct);
 
     // toast("Event has been created", {
     //   description: "Sunday, December 03, 2023 at 9:00 AM",
@@ -768,7 +809,7 @@ const SingleProduct = () => {
           </div>
 
           {/* Discounted Price */}
-          <div className="text-3xl font-medium py-3 ">₹399.00</div>
+          <div className="text-3xl font-medium py-3 ">₹675.00</div>
 
           {/* Original Price, and availability of product */}
           <div className="flex justify-between">
