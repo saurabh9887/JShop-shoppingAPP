@@ -7,19 +7,23 @@ export const useCartStore = create(
       cartItems: [],
 
       addToCart: (item) => {
-        const existingItem = get().cartItems.find((i) => i.id === item.id);
+        // const existingItem = get().cartItems.find((i) => i.id === item.id);
 
-        if (existingItem) {
-          set({
-            cartItems: get().cartItems.map((i) =>
-              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-            ),
-          });
-        } else {
-          set({
-            cartItems: [...get().cartItems, { ...item, quantity: 1 }],
-          });
-        }
+        // if (existingItem) {
+        //   set({
+        //     cartItems: get().cartItems.map((i) =>
+        //       i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        //     ),
+        //   });
+        // } else {
+        //   set({
+        //     cartItems: [...get().cartItems, { ...item, quantity: 1 }],
+        //   });
+        // }
+
+        set({
+          cartItems: [...get().cartItems, { ...item, quantity: item.quantity }],
+        });
       },
 
       removeFromCart: (id) => {

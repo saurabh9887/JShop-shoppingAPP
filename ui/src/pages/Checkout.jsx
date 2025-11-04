@@ -1,13 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CreditCard, Wallet, IndianRupee, QrCode } from "lucide-react";
 import { razorpay_Test_APIkey } from "@/Comp/BaseURL";
+import { useCartStore } from "@/Store/CartStore";
+import OrderSuccessPopup from "@/Comp/SuccessPopup";
 
 const CheckoutPage = () => {
-  const amount = 999; // Example ₹999
+  const { cartItems, getTotal } = useCartStore();
+  const [successPopup, setSuccessPopup] = useState();
+
   const currency = "INR";
+  const totalPrice = getTotal();
+  const discount = Math.round(totalPrice * 0.25);
+  const shipping = totalPrice > 1000 ? 0 : 99;
+  const grandTotal = totalPrice - discount + shipping;
+  const amount = grandTotal; // Example ₹999
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -25,9 +34,10 @@ const CheckoutPage = () => {
       description: "Order Payment",
       image: "/assets/logo.png",
       handler: (response) => {
-        alert(
-          `✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`
-        );
+        // alert(
+        //   `✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`
+        // );
+        setSuccessPopup(true);
       },
       prefill: {
         name: "Alpha",
@@ -130,7 +140,7 @@ const CheckoutPage = () => {
               onClick={handlePayment}
               className="w-full mt-8 py-6 text-base font-medium rounded-xl bg-green-600 hover:bg-green-700 transition text-white shadow-md"
             >
-              <IndianRupee className="mr-2 h-5 w-5" /> Pay ₹{amount}
+              Pay ₹{amount}
             </Button>
 
             <p className="text-xs text-gray-500 text-center mt-3">
@@ -139,6 +149,11 @@ const CheckoutPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      <OrderSuccessPopup
+        show={successPopup}
+        onHide={() => setSuccessPopup(false)}
+      />
     </div>
   );
 };

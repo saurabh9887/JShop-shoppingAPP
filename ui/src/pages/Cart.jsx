@@ -9,13 +9,15 @@ const CartPage = () => {
 
   const navigate = useNavigate();
 
+  console.log(cartItems);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const totalPrice = getTotal();
-  const discount = Math.round(totalPrice * 0.1);
-  const shipping = totalPrice > 3000 ? 0 : 99;
+  const discount = Math.round(totalPrice * 0.25);
+  const shipping = totalPrice > 1000 ? 0 : 99;
   const grandTotal = totalPrice - discount + shipping;
 
   return (
@@ -38,7 +40,7 @@ const CartPage = () => {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={item.image}
+                      src={item.images[0]}
                       alt={item.name}
                       className="w-20 h-20 object-cover rounded-md"
                     />
@@ -91,7 +93,7 @@ const CartPage = () => {
                   <span>₹{totalPrice.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Discount (10%)</span>
+                  <span>Discount (25%)</span>
                   <span className="text-green-600">
                     -₹{discount.toLocaleString()}
                   </span>

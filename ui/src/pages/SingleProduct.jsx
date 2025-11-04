@@ -648,8 +648,6 @@ const SingleProduct = () => {
   const [activeSize, setActiveSize] = useState("");
   const sizes = ["S", "M", "L", "XL", "XXL"];
 
-  console.log(cartItems);
-
   const [product, setProduct] = useState({
     id: 101,
     name: "Napoli 2025-26 De Bruyne Third Jersey",
@@ -676,15 +674,28 @@ const SingleProduct = () => {
   }, []);
 
   const handleAddToCart = () => {
-    // debugger;
+    debugger;
 
-    if (cartItems.length !== 0) return;
+    if (cartItems.length > 0) {
+      if (cartItems.filter((item) => item.id === product.id)) {
+        toast.warning("Product already added into the cart", {
+          style: {
+            background: "#c9364a", // slate-800
+            color: "white", // amber-400
+            alignContent: "center",
+            fontSize: "15px",
+          },
+        });
+        return;
+      }
+    }
 
     const finalProduct = {
       ...product,
       size: activeSize,
       quantity: count,
       addedAt: new Date().toISOString(),
+      discount: product.discount,
     };
 
     if (finalProduct.size === "") {
@@ -710,32 +721,8 @@ const SingleProduct = () => {
       });
       return;
     }
-    // else if (count === 1) {
-    //   if (
-    //     cartItems.length !== 0 &&
-    //     cartItems.filter((item) => item.id === product.id)
-    //   ) {
-    //     return;
-    //   }
-    //   toast.success("Product successfully added to the cart", {
-    //     style: {
-    //       background: "#61894d", // slate-800
-    //       color: "white", // amber-400
-    //       alignContent: "center",
-    //       fontSize: "15px",
-    //     },
-    //   });
-    // }
 
     addToCart(finalProduct);
-
-    // toast("Event has been created", {
-    //   description: "Sunday, December 03, 2023 at 9:00 AM",
-    //   action: {
-    //     label: "Undo",
-    //     onClick: () => console.log("Undo"),
-    //   },
-    // });
   };
 
   return (
