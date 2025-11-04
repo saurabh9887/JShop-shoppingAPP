@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Trash2 } from "lucide-react";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/store/CartStore";
 import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
