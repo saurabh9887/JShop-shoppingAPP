@@ -9,6 +9,7 @@ import CategoryPage from "./pages/Categories";
 import CartPage from "./pages/Cart";
 import { Toaster } from "sonner";
 import CheckoutPage from "./pages/Checkout";
+import Orders from "./pages/Orders";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="category/:cat" element={<CategoryPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="orders" element={<Orders />} />
           {/* <Route path="login" element={<LoginPage />} /> */}
         </Route>
       </Routes>

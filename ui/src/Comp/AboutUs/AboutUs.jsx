@@ -64,7 +64,7 @@ const AboutUs = () => {
           >
             <Button
               size="lg"
-              className="bg-[#61894d] text-white font-semibold px-8 py-6 rounded-full hover:bg-[#4e703e]"
+              className="bg-[#61894d] cursor-pointer text-white font-semibold px-8 py-6 rounded-full hover:bg-[#4e703e]"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             >
               Explore Collection

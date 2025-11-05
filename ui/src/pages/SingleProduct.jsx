@@ -725,6 +725,19 @@ const SingleProduct = () => {
     addToCart(finalProduct);
   };
 
+  const handleByeNow = () => {
+    const finalProduct = {
+      ...product,
+      size: activeSize,
+      quantity: 1,
+      addedAt: new Date().toISOString(),
+      discount: product.discount,
+    };
+
+    addToCart(finalProduct);
+    navigate("/checkout");
+  };
+
   return (
     <div className="w-full px-20 py-16">
       {/* <FreeReturnSlab /> */}
@@ -839,7 +852,7 @@ const SingleProduct = () => {
             </button>
 
             <button
-              onClick={() => navigate("/checkout")}
+              onClick={handleByeNow}
               className="bg-white hover:bg-gray-50 text-green-600 font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1 border-2 border-green-700"
             >
               Buy now

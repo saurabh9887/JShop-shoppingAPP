@@ -6,10 +6,12 @@ import { CreditCard, Wallet, IndianRupee, QrCode } from "lucide-react";
 import { razorpay_Test_APIkey } from "@/Comp/BaseURL";
 import { useCartStore } from "@/Store/CartStore";
 import OrderSuccessPopup from "@/Comp/SuccessPopup";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
-  const { cartItems, getTotal } = useCartStore();
+  const { cartItems, getTotal, clearCart } = useCartStore();
   const [successPopup, setSuccessPopup] = useState();
+  const navigate = useNavigate();
 
   const currency = "INR";
   const totalPrice = getTotal();
@@ -38,6 +40,7 @@ const CheckoutPage = () => {
         //   `✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`
         // );
         setSuccessPopup(true);
+        clearCart();
       },
       prefill: {
         name: "Alpha",
@@ -50,6 +53,11 @@ const CheckoutPage = () => {
 
     const rzp = new window.Razorpay(options);
     rzp.open();
+  };
+
+  const handleOnHide = () => {
+    setSuccessPopup(false);
+    navigate("/");
   };
 
   return (
@@ -150,10 +158,7 @@ const CheckoutPage = () => {
         </Card>
       </div>
 
-      <OrderSuccessPopup
-        show={successPopup}
-        onHide={() => setSuccessPopup(false)}
-      />
+      <OrderSuccessPopup show={successPopup} onHide={handleOnHide} />
     </div>
   );
 };
