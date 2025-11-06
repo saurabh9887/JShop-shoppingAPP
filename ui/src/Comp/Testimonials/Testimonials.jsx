@@ -50,11 +50,11 @@ export function Testimonials() {
 
   return (
     <section className="w-full py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto text-center px-4">
-        <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+      <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 dark:text-white">
           What Our Customers Say
         </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-8">
+        <p className="text-gray-600 dark:text-gray-300 mb-8 text-sm sm:text-base">
           Trusted by thousands of happy shoppers across India.
         </p>
 
@@ -69,10 +69,10 @@ export function Testimonials() {
             {testimonials.map((item, index) => (
               <CarouselItem
                 key={index}
-                className="md:basis-1/2 lg:basis-1/3 flex justify-center"
+                className="basis-full sm:basis-1/2 lg:basis-1/3 flex justify-center"
               >
-                <div className="p-4 flex h-full">
-                  <Card className="shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-[1.02] transition-transform duration-300 h-full flex flex-col justify-between">
+                <div className="p-3 sm:p-4 flex h-full">
+                  <Card className="shadow-md sm:shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-[1.02] transition-transform duration-300 h-full flex flex-col justify-between rounded-xl">
                     <CardHeader>
                       <CardTitle className="text-lg text-[#61894d]">
                         {item.name}
@@ -82,7 +82,7 @@ export function Testimonials() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow flex items-center justify-center">
-                      <p className="text-gray-700 dark:text-gray-300 italic">
+                      <p className="text-gray-700 dark:text-gray-300 italic text-sm sm:text-base leading-relaxed">
                         “{item.review}”
                       </p>
                     </CardContent>
@@ -91,8 +91,10 @@ export function Testimonials() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <div className="flex justify-center gap-2 mt-6">
+            <CarouselPrevious className="relative static translate-y-0" />
+            <CarouselNext className="relative static translate-y-0" />
+          </div>
         </Carousel>
       </div>
     </section>
