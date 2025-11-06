@@ -9,6 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const orders = [
   {
@@ -44,7 +45,7 @@ export default function Orders() {
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-10">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">My Orders</h1>
+        <h1 className="text-3xl font-semibold mb-6">My Orders</h1>
 
         <div className="space-y-4">
           {orders.map((order) => (
@@ -72,8 +73,8 @@ export default function Orders() {
                   </p>
                   <p className="font-medium mt-1">{order.price}</p>
                 </div>
-                <Button variant="outline" size="sm">
-                  View Details
+                <Button asChild variant="outline" size="sm">
+                  <Link to={`/orders/${order.id}`}>View Details</Link>
                 </Button>
               </CardContent>
             </Card>
