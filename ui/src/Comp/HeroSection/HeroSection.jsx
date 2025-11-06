@@ -31,7 +31,7 @@ export default function HeroSlider() {
     <section className="relative w-full h-[90vh]">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        navigation
+        // navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop

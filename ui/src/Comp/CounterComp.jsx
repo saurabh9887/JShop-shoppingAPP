@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const CounterComp = ({ count, setCount }) => {
   const handleChangeCount = (count, val) => {
     if (val === "increment") {
@@ -11,10 +9,10 @@ const CounterComp = ({ count, setCount }) => {
   };
 
   return (
-    <div className="p-5 border-2 border-black rounded-lg inline-block my-8">
-      <div className="flex gap-10">
+    <div className="p-3 sm:p-5 border-2 border-black rounded-lg inline-block my-6 sm:my-8">
+      <div className="flex items-center justify-between gap-6 sm:gap-10">
         <button
-          className="border border-black rounded-full cursor-pointer"
+          className="border border-black rounded-full cursor-pointer p-1 sm:p-2"
           onClick={() => handleChangeCount(count, "decrement")}
         >
           <svg
@@ -23,14 +21,16 @@ const CounterComp = ({ count, setCount }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="w-5 h-5 sm:w-6 sm:h-6"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
           </svg>
         </button>
-        <span className="text-xl w-3">{count}</span>
+
+        <span className="text-lg sm:text-xl w-6 text-center">{count}</span>
+
         <button
-          className="border border-black rounded-full cursor-pointer"
+          className="border border-black rounded-full cursor-pointer p-1 sm:p-2"
           onClick={() => handleChangeCount(count, "increment")}
         >
           <svg
@@ -39,7 +39,7 @@ const CounterComp = ({ count, setCount }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="w-5 h-5 sm:w-6 sm:h-6"
           >
             <path
               strokeLinecap="round"

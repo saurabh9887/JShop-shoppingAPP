@@ -127,9 +127,9 @@ const CategoryPage = () => {
           ))}
         </div>
       </section>
+      <ProductGrid title="Similar Products" />
       <FAQSection />
       <FunkySection />
-      <ProductGrid title="Similar Products" />
     </>
   );
 };

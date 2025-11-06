@@ -232,14 +232,14 @@ function MobileMenu() {
           <Link to="/" className="hover:text-green-600 text-lg">
             Home
           </Link>
-          <Link to="/shop" className="hover:text-green-600 text-lg">
-            Shop
+          <Link to="/category/sarees" className="hover:text-green-600 text-lg">
+            Categories
           </Link>
-          <Link to="/about" className="hover:text-green-600 text-lg">
-            About
-          </Link>
-          <Link to="/contact" className="hover:text-green-600 text-lg">
-            Contact
+          <a href="#contact-us" className="hover:text-green-600 text-lg">
+            Contact Us
+          </a>
+          <Link to="/orders" className="hover:text-green-600 text-lg">
+            Orders
           </Link>
         </nav>
       </SheetContent>

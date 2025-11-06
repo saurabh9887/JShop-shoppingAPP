@@ -674,8 +674,6 @@ const SingleProduct = () => {
   }, []);
 
   const handleAddToCart = () => {
-    debugger;
-
     if (cartItems.length > 0) {
       if (cartItems.filter((item) => item.id === product.id)) {
         toast.warning("Product already added into the cart", {
@@ -741,19 +739,22 @@ const SingleProduct = () => {
   return (
     <div className="w-full px-20 py-16">
       {/* <FreeReturnSlab /> */}
-      <div className="flex justify-between">
-        <div>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0 w-full">
+        {/* Breadcrumb */}
+        <div className="w-full sm:w-auto">
           <BreadcrumbWithCustomSeparator />
         </div>
-        <div className="flex gap-2 ">
-          Share
+
+        {/* Share Section */}
+        <div className="flex items-center gap-2 text-gray-700 cursor-pointer hover:text-green-600 transition-all">
+          <span className="text-sm sm:text-base font-medium">Share</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6"
+            className="w-5 h-5 sm:w-6 sm:h-6"
           >
             <path
               strokeLinecap="round"
@@ -764,25 +765,26 @@ const SingleProduct = () => {
         </div>
       </div>
 
-      <div className="flex gap-10 w-full my-5">
-        {/* Image */}
+      <div className="flex flex-col lg:flex-row gap-8 w-full my-5">
+        {/* Image Section */}
         <div className="flex-1">
           <div className="w-full">
             <img
               src={mainImage}
               alt="Product"
-              className="w-full h-full object-cover rounded-lg shadow-md transition-all duration-300"
+              className="w-full h-auto object-cover rounded-lg shadow-md transition-all duration-300"
             />
           </div>
 
-          <div className="flex gap-4 mt-4 items-center justify-center">
+          {/* Thumbnails */}
+          <div className="flex flex-wrap justify-center gap-3 mt-4">
             {product.images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index}`}
                 onClick={() => setMainImage(img)}
-                className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 transition-all duration-200 ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-md cursor-pointer border-2 transition-all duration-200 ${
                   mainImage === img
                     ? "border-[#61894d] scale-105"
                     : "border-gray-300 hover:scale-105 hover:border-[#61894d]"
@@ -792,45 +794,48 @@ const SingleProduct = () => {
           </div>
         </div>
 
+        {/* Product Details Section */}
         <div className="flex-1">
-          {/* New Arriaval, and discount */}
-          <div className="flex items-start gap-3 ">
-            <span className="text-white bg-red-600 py-1 px-2 text-sm rounded-2xl">
+          {/* Tags */}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <span className="text-white bg-red-600 py-1 px-2 text-xs sm:text-sm rounded-2xl">
               -25%
             </span>
-            <span className="text-white bg-green-600 py-1 px-2 text-sm rounded-2xl">
+            <span className="text-white bg-green-600 py-1 px-2 text-xs sm:text-sm rounded-2xl">
               New Arrival
             </span>
           </div>
 
           {/* Product Name */}
-          <div className="text-4xl font-medium py-5 ">
+          <div className="text-2xl sm:text-3xl md:text-4xl font-medium py-4">
             Napoli 2025-26 De Bruyne Third Jersey
           </div>
 
-          {/* Discounted Price */}
-          <div className="text-3xl font-medium py-3 ">₹675.00</div>
+          {/* Price */}
+          <div className="text-2xl sm:text-3xl font-semibold py-2">₹675.00</div>
 
-          {/* Original Price, and availability of product */}
-          <div className="flex justify-between">
-            <span className="text-gray-600 line-through text-2xl">₹899</span>
-            <span className="text-green-600">Available in stock</span>
+          {/* Original Price & Stock */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+            <span className="text-gray-600 line-through text-lg sm:text-2xl">
+              ₹899
+            </span>
+            <span className="text-green-600 text-sm sm:text-base">
+              Available in stock
+            </span>
           </div>
 
           {/* Size Chart */}
-
-          <div className="my-8 flex gap-3 flex-col">
-            <span className="text-gray-700 ">Size</span>
-            {/* Sizes */}
-            <div className="flex gap-8">
+          <div className="my-6 flex flex-col gap-3">
+            <span className="text-gray-700 text-sm sm:text-base">Size</span>
+            <div className="flex flex-wrap gap-4 sm:gap-6">
               {sizes.map((size) => (
                 <span
-                  className={`border border-green-600 py-1 px-6 text-sm cursor-pointer rounded transition-all
-              ${
-                activeSize === size
-                  ? "bg-green-600 text-white"
-                  : "text-gray-800 hover:bg-green-600 hover:text-white"
-              }`}
+                  key={size}
+                  className={`border border-green-600 py-1 px-5 sm:px-6 text-sm sm:text-base cursor-pointer rounded transition-all ${
+                    activeSize === size
+                      ? "bg-green-600 text-white"
+                      : "text-gray-800 hover:bg-green-600 hover:text-white"
+                  }`}
                   onClick={() => setActiveSize(size)}
                 >
                   {size}
@@ -842,30 +847,25 @@ const SingleProduct = () => {
           {/* Counter */}
           <CounterComp count={count} setCount={setCount} />
 
-          {/* Add to Cart and buy now buttons */}
-          <div className="flex gap-8 p-2">
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-2">
             <button
               onClick={handleAddToCart}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all cursor-pointer flex-1"
             >
               Add to cart
             </button>
 
             <button
               onClick={handleByeNow}
-              className="bg-white hover:bg-gray-50 text-green-600 font-semibold py-4 px-6 rounded-lg transition-all cursor-pointer flex-1 border-2 border-green-700"
+              className="bg-white hover:bg-gray-50 text-green-600 font-semibold py-3 px-6 rounded-lg transition-all cursor-pointer flex-1 border-2 border-green-700"
             >
               Buy now
             </button>
-
-            {/* <button className="">Add to cart</button>
-            <button>Buy Now</button> */}
           </div>
 
-          <div className="mt-6">
-            <span className="text-sm">
-              Categories: Jersey, Embroidery Jersey, Season Jerseys
-            </span>
+          <div className="mt-6 text-sm text-gray-700">
+            Categories: Jersey, Embroidery Jersey, Season Jerseys
           </div>
         </div>
       </div>
