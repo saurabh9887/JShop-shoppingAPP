@@ -878,9 +878,7 @@ const SingleProduct = () => {
 
       {/* You might also like section */}
 
-      <div>
-        <ProductGrid title="You might also like" />
-      </div>
+      <ProductGrid title="You might also like" />
 
       <div className="my-4">
         <FunkySection />

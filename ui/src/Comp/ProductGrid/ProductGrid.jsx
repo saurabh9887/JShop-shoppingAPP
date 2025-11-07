@@ -48,7 +48,7 @@ export function ProductGrid({ title }) {
               <CarouselItem
                 key={product.id}
                 className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-                onClick={() => navigate("shop/4")}
+                onClick={() => navigate("/shop/4")}
               >
                 <Card
                   key={index}
@@ -94,7 +94,7 @@ export function ProductGrid({ title }) {
                         ₹{product.price}
                       </p>
                       <Button
-                        onClick={() => navigate(`/shop/${product.id}`)}
+                        onClick={() => navigate(`/shop/4`)}
                         variant="default"
                         className="bg-gray-900 dark:bg-white dark:text-gray-900 hover:opacity-90"
                       >
