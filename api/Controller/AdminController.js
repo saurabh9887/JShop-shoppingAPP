@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
-import User from "../Model/UserModel.js";
+import Admin_User from "../Model/AdminModel.js";
 
-export const registerUser = async (req, res) => {
+export const registerAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -13,7 +13,7 @@ export const registerUser = async (req, res) => {
     }
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await Admin_User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -22,7 +22,7 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
-    const user = await User.create({ email, password: hashedPassword });
+    const user = await Admin_User.create({ email, password: hashedPassword });
 
     res.status(200).json({
       message: "User registered successfully",
@@ -34,7 +34,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const loginUser = async (req, res) => {
+export const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -44,7 +44,7 @@ export const loginUser = async (req, res) => {
         .json({ message: "Email and password are required" });
     }
 
-    const userData = await User.findOne({ email });
+    const userData = await Admin_User.findOne({ email });
     if (!userData) {
       return res.status(404).json({ message: "User not found" });
     }
