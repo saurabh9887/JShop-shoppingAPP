@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import Home from "./pages/Home";
@@ -11,9 +11,18 @@ import { Toaster } from "sonner";
 import CheckoutPage from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
+import AdminLayout from "./Admin/components/AdminLayout";
+import AdminLogin from "./Admin/Pages/AdminLogin";
+import AdminDashboard from "./Admin/Pages/AdminDashboard";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
+  const ProtectedAdminRoute = ({ children }) => {
+    // if (!isAdminAuthenticated()) {
+    //   return <Navigate to="/admin/login" replace />;
+    // }
+    return children;
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -28,6 +37,25 @@ const App = () => {
           <Route path="orders/:id" element={<OrderDetails />} />
           {/* <Route path="login" element={<LoginPage />} /> */}
         </Route>
+        {/* Admin Routes */}
+        <Route path="/admin">
+          <Route path="login" element={<AdminLogin />} />
+          <Route
+            path="dashboard"
+            element={
+              <ProtectedAdminRoute>
+                <AdminLayout>
+                  <AdminDashboard />
+                </AdminLayout>
+              </ProtectedAdminRoute>
+            }
+          />
+          {/* Example of nested admin routes */}
+          {/* <Route path="products" element={<AdminProducts />} /> */}
+          {/* <Route path="orders" element={<AdminOrders />} /> */}
+        </Route>
+        {/* Fallback Route */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {/* <Toaster richColors position="top-center" /> */}
       <Toaster position="top-center" />
