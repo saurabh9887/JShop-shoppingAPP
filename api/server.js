@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import UserRoute from "./routes/UserRoute.js";
 import AdminRoute from "./routes/AdminRoute.js";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 connectDB();
