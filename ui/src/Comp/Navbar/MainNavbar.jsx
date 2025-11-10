@@ -40,8 +40,10 @@ import Profile from "../Profile/Profile";
 import LoginDialog from "@/pages/LoginPage";
 import { useCartStore } from "@/Store/CartStore";
 import { categories } from "@/Middleware/Utils";
+import SignupDialog from "@/pages/Signup";
+import { useDialogStore } from "@/Store/AuthStore";
 
-const user = true;
+const user = false;
 
 function NavigationMenuDemo() {
   return (
@@ -106,11 +108,16 @@ function NavigationMenuDemo() {
             </a>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link to="/orders">Orders</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+        {user && (
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+            >
+              <Link to="/orders">Orders</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );
@@ -118,9 +125,11 @@ function NavigationMenuDemo() {
 
 const RightNavbar = () => {
   const navigate = useNavigate();
+  const { openLogin, openSignup } = useDialogStore();
   const { cartItems } = useCartStore();
   const [showNewDialog, setShowNewDialog] = React.useState(false);
   const [openLoginDialog, setOpenLoginDialog] = React.useState(false);
+  const [openSignupDialog, setOpenSignupDialog] = React.useState(false);
 
   return (
     <div>
@@ -156,16 +165,20 @@ const RightNavbar = () => {
         </div>
       ) : (
         <Button
-          className="bg-green-600 text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"
+          className="bg-[#61894d] text-white font-semibold transition-all cursor-pointer hover:bg-green-700 hover:text-white"
           variant="outline"
           size="lg"
-          onClick={() => setOpenLoginDialog(true)}
+          onClick={openLogin}
         >
           Login
         </Button>
       )}
       <Profile open={showNewDialog} onOpenChange={setShowNewDialog} />
-      <LoginDialog open={openLoginDialog} onOpenChange={setOpenLoginDialog} />
+      {/* <LoginDialog open={openLoginDialog} onOpenChange={setOpenLoginDialog} /> */}
+      {/* <SignupDialog
+        open={openSignupDialog}
+        onOpenChange={setOpenSignupDialog}
+      /> */}
     </div>
   );
 };
@@ -238,9 +251,11 @@ function MobileMenu() {
           <a href="#contact-us" className="hover:text-green-600 text-lg">
             Contact Us
           </a>
-          <Link to="/orders" className="hover:text-green-600 text-lg">
-            Orders
-          </Link>
+          {user && (
+            <Link to="/orders" className="hover:text-green-600 text-lg">
+              Orders
+            </Link>
+          )}
         </nav>
       </SheetContent>
     </Sheet>

@@ -14,6 +14,8 @@ import OrderDetails from "./pages/OrderDetails";
 import AdminLayout from "./Admin/components/AdminLayout";
 import AdminLogin from "./Admin/Pages/AdminLogin";
 import AdminDashboard from "./Admin/Pages/AdminDashboard";
+import LoginDialog from "./pages/LoginPage";
+import SignupDialog from "./pages/Signup";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
@@ -59,6 +61,8 @@ const App = () => {
       </Routes>
       {/* <Toaster richColors position="top-center" /> */}
       <Toaster position="top-center" />
+      <LoginDialog />
+      <SignupDialog />
     </BrowserRouter>
   );
 };

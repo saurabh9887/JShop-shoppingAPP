@@ -1,22 +1,11 @@
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
-  CardFooter as CardFooterBase,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -24,32 +13,32 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDialogStore } from "@/Store/AuthStore";
 
-function LoginDialog() {
-  const { isLoginOpen, closeLogin, openSignup } = useDialogStore();
+function SignupDialog() {
+  const { isSignupOpen, closeSignup, openLogin } = useDialogStore();
 
   return (
-    <Dialog open={isLoginOpen} onOpenChange={closeLogin}>
-      <DialogContent className="sm:max-w-[425px] p-2">
-        {/* <DialogHeader>
-          <DialogTitle>Login to your account</DialogTitle>  
-          <DialogDescription>
-            Enter your email below to access your account.
-          </DialogDescription>
-        </DialogHeader> */}
-
+    <Dialog open={isSignupOpen} onOpenChange={closeSignup}>
+      <DialogContent className="sm:max-w-[425px] p-2 mt-10">
         <Card className="w-full max-w-sm shadow-none border-0">
           <CardHeader className="text-center">
-            <CardTitle>Login to your account</CardTitle>
+            <CardTitle>Create an account</CardTitle>
             <CardDescription>
-              Enter your email below to login to your account
+              Enter your details below to create a new account
             </CardDescription>
-            {/* <CardAction>
-              <Button variant="link">Sign Up</Button>
-            </CardAction> */}
           </CardHeader>
+
           <CardContent>
             <form>
               <div className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="John Doe"
+                    required
+                  />
+                </div>
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -60,36 +49,32 @@ function LoginDialog() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    {/* <a
-                      href="#"
-                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a> */}
-                  </div>
+                  <Label htmlFor="password">Password</Label>
                   <Input id="password" type="password" required />
                 </div>
+                {/* <div className="grid gap-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input id="confirmPassword" type="password" required />
+                </div> */}
               </div>
             </form>
           </CardContent>
+
           <CardFooter className="flex-col gap-3">
             <Button type="submit" className="w-full">
-              Login
+              Sign Up
             </Button>
-
             <div className="text-sm text-center">
-              Don’t have an account?{" "}
+              Already have an account?{" "}
               <Button
                 variant="link"
-                className="p-0 h-auto font-medium text-primary cursor-pointer"
+                className="p-0 h-auto font-medium text-primary"
                 onClick={() => {
-                  closeLogin();
-                  openSignup();
+                  closeSignup();
+                  openLogin();
                 }}
               >
-                Sign Up
+                Login
               </Button>
             </div>
           </CardFooter>
@@ -99,4 +84,4 @@ function LoginDialog() {
   );
 }
 
-export default LoginDialog;
+export default SignupDialog;

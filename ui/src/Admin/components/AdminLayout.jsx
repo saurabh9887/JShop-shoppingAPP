@@ -100,9 +100,9 @@ const AdminLayout = ({ children }) => {
               Admin Dashboard
             </h2>
           </div>
-          <div className="flex items-center space-x-4">
+          {/* <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">Welcome, Admin</span>
-          </div>
+          </div> */}
         </Card>
 
         {/* Page Content */}
