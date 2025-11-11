@@ -17,19 +17,25 @@ import AdminDashboard from "./Admin/Pages/AdminDashboard";
 import LoginDialog from "./pages/LoginPage";
 import SignupDialog from "./pages/Signup";
 import { useDialogStore } from "./Store/AuthStore";
+import { useDialogStoreAdmin } from "./Store/AdminAuthStore";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   const { loadUserFromStorage } = useDialogStore();
+  const { loadUserFromStorageAdmin, user } = useDialogStoreAdmin();
 
   useEffect(() => {
     loadUserFromStorage();
   }, []);
 
+  useEffect(() => {
+    loadUserFromStorageAdmin();
+  }, []);
+
   const ProtectedAdminRoute = ({ children }) => {
-    // if (!isAdminAuthenticated()) {
-    //   return <Navigate to="/admin/login" replace />;
-    // }
+    if (!user) {
+      return <Navigate to="/admin/login" replace />;
+    }
     return children;
   };
   return (

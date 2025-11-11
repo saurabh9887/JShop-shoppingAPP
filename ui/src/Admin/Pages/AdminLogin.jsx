@@ -6,39 +6,41 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import bgImage from "/assets/Images/b2.jpg";
+import { useDialogStoreAdmin } from "@/Store/AdminAuthStore";
+import { LoginAdminAPI } from "../AdminServices/AdminAuth/AdminAuthAPI";
 
 const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
+  const { user, authSuccess } = useDialogStoreAdmin();
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!form.email || !form.password) {
-      toast.error("Please fill all fields");
-      return;
-    }
+  const handleLogin = async () => {
+    const params = {
+      email: form.email,
+      password: form.password,
+    };
 
     try {
-      setLoading(true);
+      const res = await LoginAdminAPI(params);
+      if (res.status === 200) {
+        authSuccess(res.data);
+        toast.success("Login successful", {
+          style: {
+            background: "#61894d", // slate-800
+            color: "white", // amber-400
+            alignContent: "right",
+            fontSize: "15px",
+          },
+        });
 
-      // --- MOCK LOGIN LOGIC ---
-      if (form.email === "admin@site.com" && form.password === "admin123") {
-        localStorage.setItem("adminToken", "sample_admin_token");
-        toast.success("Login successful!");
         navigate("/admin/dashboard");
-      } else {
-        toast.error("Invalid credentials");
       }
     } catch (error) {
-      toast.error("Something went wrong");
-      console.error(error);
-    } finally {
-      setLoading(false);
+      console.log(error);
     }
   };
 
@@ -65,7 +67,7 @@ const AdminLogin = () => {
           </p>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -95,7 +97,8 @@ const AdminLogin = () => {
             </div>
 
             <Button
-              type="submit"
+              type="button"
+              onClick={handleLogin}
               className="w-full font-semibold mt-2 bg-[#61894d] hover:bg-[#527941] text-white transition"
               disabled={loading}
             >

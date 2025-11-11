@@ -4,14 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useDialogStoreAdmin } from "@/Store/AdminAuthStore";
 
 const AdminLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const { logout } = useDialogStoreAdmin();
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    navigate("/admin/login");
+    logout();
   };
 
   return (
@@ -73,6 +74,7 @@ const AdminLayout = ({ children }) => {
         {/* Logout Button */}
         <div className="p-4 border-t">
           <Button
+            type="button"
             variant="ghost"
             className="w-full flex items-center justify-start gap-3 text-gray-700 hover:text-red-600"
             onClick={handleLogout}
