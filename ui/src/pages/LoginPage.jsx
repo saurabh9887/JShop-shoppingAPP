@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -23,9 +23,51 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDialogStore } from "@/Store/AuthStore";
+import { LoginAPI } from "@/Services/AuthAPI/AuthAPI";
+import { toast } from "sonner";
 
 function LoginDialog() {
-  const { isLoginOpen, closeLogin, openSignup } = useDialogStore();
+  const { isLoginOpen, closeLogin, openSignup, authSuccess } = useDialogStore();
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLogin = async () => {
+    const params = {
+      email: userData.email,
+      password: userData.password,
+    };
+
+    try {
+      const res = await LoginAPI(params);
+
+      if (res.status === 200) {
+        authSuccess(res.data);
+        toast.success("Login successful", {
+          style: {
+            background: "#61894d", // slate-800
+            color: "white", // amber-400
+            alignContent: "right",
+            fontSize: "15px",
+          },
+        });
+        closeLogin();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    const trimmedValue = value.startsWith(" ") ? value.trimStart() : value;
+
+    setUserData((prev) => ({
+      ...prev,
+      [id]: trimmedValue,
+    }));
+  };
 
   return (
     <Dialog open={isLoginOpen} onOpenChange={closeLogin}>
@@ -57,6 +99,7 @@ function LoginDialog() {
                     type="email"
                     placeholder="m@example.com"
                     required
+                    onChange={(e) => handleInputChange(e)}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -69,13 +112,18 @@ function LoginDialog() {
                       Forgot your password?
                     </a> */}
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input
+                    id="password"
+                    type="password"
+                    required
+                    onChange={(e) => handleInputChange(e)}
+                  />
                 </div>
               </div>
             </form>
           </CardContent>
           <CardFooter className="flex-col gap-3">
-            <Button type="submit" className="w-full">
+            <Button onClick={handleLogin} className="w-full">
               Login
             </Button>
 

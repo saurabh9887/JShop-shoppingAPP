@@ -43,9 +43,7 @@ import { categories } from "@/Middleware/Utils";
 import SignupDialog from "@/pages/Signup";
 import { useDialogStore } from "@/Store/AuthStore";
 
-const user = false;
-
-function NavigationMenuDemo() {
+function NavigationMenuDemo({ user }) {
   return (
     <NavigationMenu viewport={false} className="hidden md:flex">
       <NavigationMenuList>
@@ -123,7 +121,7 @@ function NavigationMenuDemo() {
   );
 }
 
-const RightNavbar = () => {
+const RightNavbar = ({ user, handleLogout }) => {
   const navigate = useNavigate();
   const { openLogin, openSignup } = useDialogStore();
   const { cartItems } = useCartStore();
@@ -158,7 +156,9 @@ const RightNavbar = () => {
                 <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
+                  Logout
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -201,6 +201,8 @@ function ListItem({ title, children, href }) {
 // ✅ FIXED Navbar
 const MainNavbar = () => {
   const navigate = useNavigate();
+  const { user, logout } = useDialogStore();
+
   return (
     <header className="flex justify-between items-center p-4 shadow-md sticky top-0 bg-white dark:bg-gray-900 z-[100]">
       {/* Logo */}
@@ -212,21 +214,21 @@ const MainNavbar = () => {
       </div>
 
       {/* Desktop Menu */}
-      <NavigationMenuDemo />
+      <NavigationMenuDemo user={user} />
 
       {/* Right Section (Login + Hamburger) */}
       <div className="flex items-center gap-3">
         <div className="block md:hidden">
-          <MobileMenu />
+          <MobileMenu user={user} />
         </div>
-        <RightNavbar />
+        <RightNavbar user={user} handleLogout={logout} />
       </div>
     </header>
   );
 };
 
 // ✅ Fixed MobileMenu with correct z-index + working trigger
-function MobileMenu() {
+function MobileMenu({ user }) {
   return (
     <Sheet>
       <SheetTrigger asChild>

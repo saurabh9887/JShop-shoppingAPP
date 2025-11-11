@@ -24,7 +24,6 @@ function SignupDialog() {
   const { isSignupOpen, closeSignup, openLogin } = useDialogStore();
 
   const handleRegister = async () => {
-    debugger;
     const params = {
       fullName: userData.fullName,
       email: userData.email,
@@ -44,6 +43,7 @@ function SignupDialog() {
           },
         });
         closeSignup();
+        openLogin();
       }
     } catch (error) {
       console.log(error);

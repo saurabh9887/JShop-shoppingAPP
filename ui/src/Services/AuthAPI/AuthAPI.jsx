@@ -15,3 +15,18 @@ export const RegisterAPI = async (params) => {
     throw new Error("Network error, please try again");
   }
 };
+
+export const LoginAPI = async (params) => {
+  try {
+    const url = `${Base_URL}/auth/login`;
+    const res = await axios.post(url, params);
+    return res; // return only useful data
+  } catch (error) {
+    // Handle known backend errors
+    if (error.response) {
+      throw new Error(error.response.data.message || "Login failed");
+    }
+    // Handle network / unknown errors
+    throw new Error("Network error, please try again");
+  }
+};

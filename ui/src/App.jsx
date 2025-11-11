@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -16,9 +16,16 @@ import AdminLogin from "./Admin/Pages/AdminLogin";
 import AdminDashboard from "./Admin/Pages/AdminDashboard";
 import LoginDialog from "./pages/LoginPage";
 import SignupDialog from "./pages/Signup";
+import { useDialogStore } from "./Store/AuthStore";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
+  const { loadUserFromStorage } = useDialogStore();
+
+  useEffect(() => {
+    loadUserFromStorage();
+  }, []);
+
   const ProtectedAdminRoute = ({ children }) => {
     // if (!isAdminAuthenticated()) {
     //   return <Navigate to="/admin/login" replace />;
