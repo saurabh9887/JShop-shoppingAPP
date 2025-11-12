@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import UserRoute from "./routes/UserRoute.js";
 import AdminRoute from "./routes/AdminRoute.js";
+import ProductRoute from "./routes/ProductRoute.js";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", UserRoute);
 app.use("/api/admin", AdminRoute);
+app.use("/api/product", ProductRoute);
 
 app.listen(5000, () => {
   console.log("Express is listning");
