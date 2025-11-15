@@ -18,19 +18,20 @@ import LoginDialog from "./pages/LoginPage";
 import SignupDialog from "./pages/Signup";
 import { useDialogStore } from "./Store/AuthStore";
 import { useDialogStoreAdmin } from "./Store/AdminAuthStore";
+import ProductList from "./Admin/Pages/Products/ProductsList";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   const { loadUserFromStorage } = useDialogStore();
-  const { loadUserFromStorageAdmin, user } = useDialogStoreAdmin();
+  const { user } = useDialogStoreAdmin();
 
   useEffect(() => {
     loadUserFromStorage();
   }, []);
 
-  useEffect(() => {
-    loadUserFromStorageAdmin();
-  }, []);
+  // useEffect(() => {
+  //   loadUserFromStorageAdmin();
+  // }, []);
 
   const ProtectedAdminRoute = ({ children }) => {
     if (!user) {
@@ -61,6 +62,16 @@ const App = () => {
               <ProtectedAdminRoute>
                 <AdminLayout>
                   <AdminDashboard />
+                </AdminLayout>
+              </ProtectedAdminRoute>
+            }
+          />
+          <Route
+            path="products"
+            element={
+              <ProtectedAdminRoute>
+                <AdminLayout>
+                  <ProductList />
                 </AdminLayout>
               </ProtectedAdminRoute>
             }

@@ -1,30 +1,23 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export const useDialogStoreAdmin = create((set) => ({
-  user: null, // store actual user data instead of just boolean
+export const useDialogStoreAdmin = create(
+  persist(
+    (set) => ({
+      user: null,
 
-  // ✅ When login/signup success
-  authSuccess: (userData) => {
-    // Store in localStorage
-    localStorage.setItem("Admin_User", JSON.stringify(userData));
+      // ✅ When login/signup success
+      authSuccess: (userData) => {
+        set({ user: userData });
+      },
 
-    // Update Zustand store
-    set({
-      user: userData,
-    });
-  },
-
-  // ✅ Optional: load user from localStorage on app start
-  loadUserFromStorageAdmin: () => {
-    const storedUser = localStorage.getItem("Admin_User");
-    if (storedUser) {
-      set({ user: JSON.parse(storedUser) });
+      // ✅ Logout
+      logout: () => {
+        set({ user: null });
+      },
+    }),
+    {
+      name: "Admin_User", // key in localStorage
     }
-  },
-
-  // ✅ Optional: logout
-  logout: () => {
-    localStorage.removeItem("Admin_User");
-    set({ user: null });
-  },
-}));
+  )
+);
