@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
-    productID: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     productKeyID: {
       type: String,
       default: null, // null if new product
@@ -29,11 +24,11 @@ const productSchema = new mongoose.Schema(
     },
     discountedPrice: {
       type: Number,
-      required: true,
     },
     inStock: {
       type: Boolean,
-      default: true,
+      default: false,
+      required: true,
     },
     size: {
       type: String,
@@ -42,6 +37,7 @@ const productSchema = new mongoose.Schema(
     counter: {
       type: Number,
       default: 0,
+      required: true,
     },
     categories: {
       type: [String],

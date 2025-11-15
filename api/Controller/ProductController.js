@@ -5,7 +5,6 @@ export const addOrUpdateProduct = async (req, res) => {
   try {
     const {
       productKeyID,
-      productID,
       discount,
       tags,
       name,
@@ -25,7 +24,6 @@ export const addOrUpdateProduct = async (req, res) => {
       const updatedProduct = await Product.findOneAndUpdate(
         { productKeyID },
         {
-          productID,
           discount,
           tags,
           name,
@@ -55,7 +53,6 @@ export const addOrUpdateProduct = async (req, res) => {
 
     // Else → Add new product
     const newProduct = new Product({
-      productID,
       discount,
       tags,
       name,
@@ -180,6 +177,55 @@ export const getAllProducts = async (req, res) => {
 };
 
 export const getProductByKeyID = async (req, res) => {
+  try {
+    const { productKeyID } = req.query;
+
+    if (!productKeyID) {
+      return res.status(400).json({
+        statusCode: 400,
+        errorMessage: "productKeyID is required",
+        message: "Bad Request",
+        totalCount: 0,
+        responseData: { data: [] },
+      });
+    }
+
+    // Fetch the product
+    const product = await Product.findOne({ productKeyID });
+
+    if (!product) {
+      return res.status(404).json({
+        statusCode: 404,
+        errorMessage: "No product found with this productKeyID",
+        message: "Product not found",
+        totalCount: 0,
+        responseData: { data: [] },
+      });
+    }
+
+    // ✅ Standard response format
+    return res.status(200).json({
+      statusCode: 200,
+      errorMessage: null,
+      message: "Product fetched successfully",
+      totalCount: 1,
+      responseData: {
+        data: [product],
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      statusCode: 500,
+      errorMessage: error.message,
+      message: "Server error while fetching product",
+      totalCount: 0,
+      responseData: { data: [] },
+    });
+  }
+};
+
+export const getProductByKeyIDWeb = async (req, res) => {
   try {
     const { productKeyID } = req.query;
 

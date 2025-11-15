@@ -19,6 +19,7 @@ import SignupDialog from "./pages/Signup";
 import { useDialogStore } from "./Store/AuthStore";
 import { useDialogStoreAdmin } from "./Store/AdminAuthStore";
 import ProductList from "./Admin/Pages/Products/ProductsList";
+import GlobalLoader from "./Comp/GlobalLoader";
 // import LoginPage from "./pages/LoginPage";
 
 const App = () => {
@@ -85,6 +86,7 @@ const App = () => {
       </Routes>
       {/* <Toaster richColors position="top-center" /> */}
       <Toaster position="top-center" />
+      <GlobalLoader />
       <LoginDialog />
       <SignupDialog />
     </BrowserRouter>

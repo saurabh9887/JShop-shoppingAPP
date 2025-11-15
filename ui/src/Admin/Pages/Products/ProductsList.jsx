@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { CalendarIcon, Plus } from "lucide-react";
+import { CalendarIcon, Pencil, Plus } from "lucide-react";
 import { format } from "date-fns";
 import {
   Popover,
@@ -27,6 +27,8 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import AddProductDialog from "./AddupdateProduct";
+import { useLoaderStore } from "@/Store/LoaderStore";
+import { getAllProductsAPI } from "@/Admin/AdminServices/ProductsAPI/ProductsAPI";
 
 // Mock product data
 const mockProducts = [
@@ -69,6 +71,12 @@ const mockProducts = [
 
 const ProductList = () => {
   const [search, setSearch] = useState("");
+  const [modelRequestData, setModelRequestData] = useState({
+    Action: null,
+    ProductKeyID: null,
+  });
+  const [productList, setProductList] = useState([]);
+  const { showLoader, hideLoader } = useLoaderStore();
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [addProduct, setAddProduct] = useState(false);
@@ -96,6 +104,50 @@ const ProductList = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [search, fromDate, toDate]);
+
+  useEffect(() => {
+    GetAllProductsData();
+  }, []);
+
+  const GetAllProductsData = async () => {
+    showLoader();
+    const res = await getAllProductsAPI({
+      search: null, // optional text search
+      startDate: null, // optional from date
+      endDate: null, // optional to date
+      page: 1, // default pagination page
+      limit: 10, // default per-page count
+      sort: "-createdAt", // default: newest first
+    });
+
+    if (res.status === 200) {
+      hideLoader();
+      setProductList(res.data.responseData.data);
+    }
+    try {
+    } catch (error) {
+      hideLoader();
+      console.log(error);
+    }
+  };
+
+  const handleAdd = () => {
+    setModelRequestData((prev) => ({
+      ...prev,
+      Action: null,
+      ProductKeyID: null,
+    }));
+    setAddProduct(true);
+  };
+
+  const handleUpdate = (item) => {
+    setModelRequestData((prev) => ({
+      ...prev,
+      Action: "update",
+      ProductKeyID: item.productKeyID,
+    }));
+    setAddProduct(true);
+  };
 
   return (
     <Card className="p-4">
@@ -151,10 +203,7 @@ const ProductList = () => {
             </PopoverContent>
           </Popover>
 
-          <Button
-            className="flex items-center gap-2"
-            onClick={() => setAddProduct(true)}
-          >
+          <Button className="flex items-center gap-2" onClick={handleAdd}>
             <Plus className="h-4 w-4" />
             Add Product
           </Button>
@@ -170,12 +219,15 @@ const ProductList = () => {
                 <TableHead>Product Name</TableHead>
                 <TableHead>Price (₹)</TableHead>
                 <TableHead>Stock</TableHead>
+                <TableHead>Stock count</TableHead>
+                <TableHead>Size</TableHead>
                 <TableHead>Date Added</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paginatedProducts.length ? (
-                paginatedProducts.map((product, index) => (
+              {productList.length ? (
+                productList.map((product, index) => (
                   <TableRow key={product.id}>
                     <TableCell>
                       {(currentPage - 1) * itemsPerPage + index + 1}
@@ -183,10 +235,20 @@ const ProductList = () => {
                     <TableCell className="font-medium">
                       {product.name}
                     </TableCell>
-                    <TableCell>{product.price}</TableCell>
-                    <TableCell>{product.stock}</TableCell>
+                    <TableCell>{product.originalPrice}</TableCell>
+                    <TableCell>
+                      {product.inStock ? "Available" : "Out of stock"}
+                    </TableCell>
+                    <TableCell>{product.counter}</TableCell>
+                    <TableCell>{product.size}</TableCell>
                     <TableCell>
                       {format(product.createdAt, "dd MMM yyyy")}
+                    </TableCell>
+                    <TableCell>
+                      <Pencil
+                        className="hover:cursor-pointer"
+                        onClick={() => handleUpdate(product)}
+                      />
                     </TableCell>
                   </TableRow>
                 ))
@@ -249,7 +311,11 @@ const ProductList = () => {
         )}
       </CardContent>
 
-      <AddProductDialog show={addProduct} onHide={() => setAddProduct(false)} />
+      <AddProductDialog
+        show={addProduct}
+        onHide={() => setAddProduct(false)}
+        modelRequestData={modelRequestData}
+      />
     </Card>
   );
 };

@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const AddProductDialog = ({ show, onHide, onSubmit }) => {
+const AddProductDialog = ({ show, onHide, onSubmit, modelRequestData }) => {
   const [form, setForm] = useState({
     productID: "",
     productKeyID: "",
@@ -56,10 +56,13 @@ const AddProductDialog = ({ show, onHide, onSubmit }) => {
       <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto p-6">
         <DialogHeader>
           <DialogTitle className="text-2xl font-semibold">
-            Add New Product
+            {modelRequestData.Action === null ? "Add " : "Update "}
+            Product
           </DialogTitle>
           <DialogDescription>
-            Fill in all fields to create a new product entry.
+            Fill in all fields to{" "}
+            {modelRequestData.Action === null ? "Add " : "Update "}
+            product entry.
           </DialogDescription>
         </DialogHeader>
 
@@ -67,7 +70,9 @@ const AddProductDialog = ({ show, onHide, onSubmit }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
           {/* Name */}
           <div className="space-y-1">
-            <Label>Name</Label>
+            <Label>
+              Name <span className="text-red-600">*</span>
+            </Label>
             <Input
               value={form.name}
               onChange={(e) => handleChange("name", e.target.value)}
@@ -87,7 +92,9 @@ const AddProductDialog = ({ show, onHide, onSubmit }) => {
 
           {/* Original Price */}
           <div className="space-y-1">
-            <Label>Original Price (₹)</Label>
+            <Label>
+              Original Price (₹) <span className="text-red-600">*</span>
+            </Label>
             <Input
               type="text"
               placeholder="Original Price (₹)"
@@ -120,7 +127,9 @@ const AddProductDialog = ({ show, onHide, onSubmit }) => {
 
           {/* Counter */}
           <div className="space-y-1">
-            <Label>Stock Count</Label>
+            <Label>
+              Stock Count <span className="text-red-600">*</span>
+            </Label>
             <Input
               type="text"
               placeholder="Stock Count"
@@ -187,7 +196,9 @@ const AddProductDialog = ({ show, onHide, onSubmit }) => {
               checked={form.inStock}
               onCheckedChange={(val) => handleChange("inStock", val)}
             />
-            <Label>In Stock</Label>
+            <Label>
+              In Stock <span className="text-red-600">*</span>
+            </Label>
           </div>
         </div>
 
@@ -196,7 +207,9 @@ const AddProductDialog = ({ show, onHide, onSubmit }) => {
             <Button variant="outline">Cancel</Button>
           </DialogClose>
 
-          <Button onClick={handleSubmit}>Save Product</Button>
+          <Button onClick={handleSubmit}>
+            {modelRequestData.Action === null ? "Add " : "Update "} Product
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
